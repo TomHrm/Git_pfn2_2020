@@ -1,7 +1,7 @@
 # Pfn2_2020
 
 ## Contents
-1. [How to:](#Einführung)
+1. [How to](#Einführung)
 2. [PFN](#Pfn)
 
 ## Introduction
