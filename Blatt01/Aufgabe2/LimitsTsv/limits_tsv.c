@@ -2,7 +2,7 @@
 #include<limits.h>
 #define BITS(X) (sizeof(X) *8)
 
-int main()
+int main(void)
 {
 	printf("# type\tbits\tmin\tmax\tmax\n");
 	printf("char\t%u\t%d\t%d\t%3.2e\n", (int) BITS(char), SCHAR_MIN, SCHAR_MAX, (float) SCHAR_MAX); 

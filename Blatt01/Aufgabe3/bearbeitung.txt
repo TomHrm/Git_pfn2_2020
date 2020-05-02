@@ -15,7 +15,7 @@ Schwierigkeitsgrad: genau richtig
 # Aufgabenstellung formuliert war. Die m"oglichen Werte sind vorgegeben.
 # Bitte die Werte streichen, die nicht zutreffen.
 
-Aufgabenstellung: weitgehend klar
+Aufgabenstellung: wenig klar
 Das Problem bestand darin zu wissen was am ende ausgegeben werden solle da verschiedene Sachen ausgerechnet werden sollten
 
 # Falls eine der beiden letzten Kategorien zutrifft, bitte
