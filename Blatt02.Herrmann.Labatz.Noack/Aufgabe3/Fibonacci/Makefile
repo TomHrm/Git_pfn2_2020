@@ -15,13 +15,13 @@ ${FILE_BASE}_large.x:${FILE_BASE}.c
 	${CC} ${CFLAGS} -o $@ $<
 
 test_small:${FILE_BASE}_small.x 
-	@$< | diff - fibonacci_small.tsv
+	@./$< | diff - fibonacci_small.tsv
 
 test_medium:${FILE_BASE}_medium.x 
-	@$< | diff - fibonacci_medium.tsv
+	@./$< | diff - fibonacci_medium.tsv
 
 test_large:${FILE_BASE}_large.x 
-	@$< | diff - fibonacci_large.tsv
+	@./$< | diff - fibonacci_large.tsv
 
 test:test_small test_medium test_large
 	@echo "Congratulations. Tests passed"
