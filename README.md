@@ -3,9 +3,9 @@
 ## Contents
 1. [Introduction](#Einführung)
 2. [PFN](#Pfn)
-4. [How to clone](#How to Clone)
-5. [How to push](#How to push))
-6. [How to tar.gz](#How to Abgabe fertig machen))
+3. [How to clone](#How_to_Clone)
+4. [How to push](#How_to_push))
+5. [How to tar.gz](#How_to_Abgabe_fertig_machen))
 
 ## Introduction
 Pfn 2 im Jahr 2020 bei prof. kurz
@@ -22,7 +22,7 @@ git add -A
 git commit -m "autosave %date%-%time:~0,8%"
 git push
 
-##How to tar.gz
+## How to tar.gz
 
 Zum erstellen der Abgabe lediglich die "tar_loesungen.py" mit der Übungsnummer als Argument angeben.
 Z.b. 
