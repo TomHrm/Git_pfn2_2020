@@ -23,7 +23,8 @@ int main()
 				}
 				else
 				{
-					printf("%3d%s\\%d", n,  n < 10 ? "   ": ( n < 100 ? "  ": " "), n);
+					//printf("%3d%s\\%d", n,  n < 10 ? "   ": ( n < 100 ? "  ": " "), n);
+					printf("%3d %\3c%d",n ,n ,n);
 				}
 				if(i < 3)
 				{
