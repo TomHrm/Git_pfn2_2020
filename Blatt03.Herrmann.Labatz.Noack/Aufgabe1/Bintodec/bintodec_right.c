@@ -12,28 +12,33 @@
 
 char *decimal2bitvector(unsigned int n)
 {
-  char *bitvector;
-  bitvector = malloc(BITVECTOR_MAX_WIDTH +1);
-  if (bitvector == NULL)
-  {
-    fprintf(stderr, "malloc failed: %d", BITVECTOR_MAX_WIDTH);
-    exit(EXIT_FAILURE);
-  }
-  for (int i = BITVECTOR_MAX_WIDTH -1; i >= 0; i--)
-  {
-    if ((BITVECTOR_MAX_WIDTH - i) % 9 == 0)
+    char *bitvector;
+
+    bitvector = (char*) malloc(BITVECTOR_MAX_WIDTH+1);
+    for (int i = 0, potenz = NUMOFBITS - 1; i <= BITVECTOR_MAX_WIDTH; i++)
     {
-      bitvector[i] = ' ';
+        if (i % 9 == 8)
+        {
+            bitvector[i] = ' ';
+        }
+        else
+        {
+            if (n >= ((unsigned int) 1)  << potenz)
+            {
+                n -= ((unsigned int) 1) << potenz;
+                bitvector[i] = '1';
+            } 
+            else
+            {
+                bitvector[i] = '0';
+            }
+            potenz--;
+        }
     }
-    else
-    {
-      bitvector[i] = ((char) n % 2) + '0';
-      n /= 2;
-      
-    }
-  }
-  bitvector[BITVECTOR_MAX_WIDTH] = '\0';
-  return bitvector;
+    
+    bitvector[BITVECTOR_MAX_WIDTH] = 0x00;
+
+    return bitvector;
 }
 
 int bitvector_validate(const char *bitvector)
@@ -69,17 +74,23 @@ int bitvector_validate(const char *bitvector)
 
 unsigned int bitvector2decimal(const char *bitvector)
 {
-  unsigned int summe = 0;
-  unsigned int potenz = 1;
-  for (int i = strlen(bitvector) ; i >= 0 ; i--)
-  {
-    if (bitvector[i-1] == '1')
+    int i = strlen(bitvector);
+    int potenz = 0;
+    unsigned int summe = 0;
+    while (i >= 0)
     {
-      summe += potenz;
+        if (bitvector[i] == '1')
+        {
+            summe += ((unsigned int) 1) << potenz;
+            potenz++;
+        }
+        else if (bitvector[i] == '0'  )
+        {
+            potenz++;
+        }
+        i--;
     }
-    potenz *= 2;
-  }
-  return summe;
+    return summe;
 }
 /*
 int main(int argc, char *argv[])
