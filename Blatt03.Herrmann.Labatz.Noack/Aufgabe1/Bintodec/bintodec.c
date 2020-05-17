@@ -1,0 +1,93 @@
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <stdbool.h>
+#include <string.h>
+//#include "bintodec.h"
+
+#define NUMOFBITS 32 /* number of bits in bitvector */
+#define BITVECTOR_MAX_WIDTH (NUMOFBITS + NUMOFBITS/CHAR_BIT - 1)
+
+
+char *decimal2bitvector(unsigned int n)
+{
+  char *bitvector;
+  bitvector = malloc(BITVECTOR_MAX_WIDTH +1);
+  if (bitvector == NULL)
+  {
+    fprintf(stderr, "malloc failed: %d", BITVECTOR_MAX_WIDTH);
+    exit(EXIT_FAILURE);
+  }
+  for (int i = BITVECTOR_MAX_WIDTH -1; i >= 0; i--)
+  {
+    if ((BITVECTOR_MAX_WIDTH - i) % 9 == 0)
+    {
+      bitvector[i] = ' ';
+    }
+    else
+    {
+      bitvector[i] = ((char) n % 2) + '0';
+      n /= 2;
+      
+    }
+  }
+  bitvector[BITVECTOR_MAX_WIDTH] = '\0';
+  return bitvector;
+}
+
+int bitvector_validate(const char *bitvector)
+{
+  if ( !(NUMOFBITS <= strlen(bitvector) && strlen(bitvector) <= BITVECTOR_MAX_WIDTH))
+  {
+    fprintf(stderr,"Ungueltige Eingabe Laenge.\n");
+    return -1;
+  }
+  int valid = 0;
+
+  for (int i = 0; i< strlen(bitvector); i++)
+  {
+    if (bitvector[i] == '0' || bitvector[i] == '1')
+    {
+      valid++;
+    }
+    else if (bitvector[i] != ' ')
+    {
+      fprintf(stderr,"Ungueltiger Charakter.\n");
+      return -1;
+    }
+  }
+  
+  if (valid != NUMOFBITS)
+  {
+    fprintf(stderr,"Ungueltige Bitanzahl.\n");
+    return -1;
+  }
+  
+  return 0;
+}
+
+unsigned int bitvector2decimal(const char *bitvector)
+{
+  unsigned int summe = 0;
+  unsigned int potenz = 1;
+  for (int i = strlen(bitvector) ; i >= 0 ; i--)
+  {
+    if (bitvector[i-1] == '1')
+    {
+      summe += potenz;
+    }
+    potenz *= 2;
+  }
+  return summe;
+}
+/*
+int main(int argc, char *argv[])
+{
+  printf("%d,%s\n",argc, argv[0]);
+  printf("%s\n", decimal2bitvector(256));
+  //printf("%d",bitvector_validate(decimal2bitvector(20)));
+  //printf("%d",bitvector2decimal(decimal2bitvector(20)));
+  return EXIT_SUCCESS;
+}
+*/

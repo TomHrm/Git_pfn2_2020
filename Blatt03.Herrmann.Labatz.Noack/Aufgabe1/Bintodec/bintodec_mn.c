@@ -10,6 +10,11 @@
    dann true zur"uck, wenn die Bitvektoren die gleichen Zahlen
    repr"asentieren.
    FRAGE 1: Warum kann man hierf"ur nicht die C-Funktion strcmp verwenden?
+   
+   ANTWORT: Die strcmp Funktion vergleicht zwei Strings und beachtet Leerzeichen. 
+   Bitvektoren können Leeerzeichen enthalten oder auch nicht.
+   Der gleiche String würde bei unterschiedlichen Schreibweisen unterschiedlich
+   ausgewertet werden.
 */
 
 static bool bitvector_equal(const char *bv0,const char *bv1)
@@ -46,8 +51,13 @@ static bool bitvector_equal(const char *bv0,const char *bv1)
 /* Diese Funktion verifiziert, dass die Konversion einer Dezimalzahl n
    in den Bitvektor und die Konversion des Bitvektors in eine
    Dezimalzahl die urspr"ungliche Dezimalzahl n liefert.
+   
    FRAGE 2: Warum ist es notwendig, an drei Stellen die Funktion free
-   aufzurufen? */
+   aufzurufen? 
+   
+   ANTWORT: Es wird vor jeden Return, also Beenden der Funktion,
+   aufgerufen um den Speicher wieder freizugeben.
+   */
 
 static int verify_conversion(unsigned int decimal)
 {
@@ -81,14 +91,22 @@ int main(int argc,char *argv[0])
     unsigned int decimal, display;
 
     /* FRAGE 3: F"ur welche Werte werden in der folgenden for-Schleife
-       Tests durchf"uhrt? */
+       Tests durchf"uhrt? 
+
+       ANTWORT: In der Schleife werden alle 2er Potenzen
+       bis 16777215 getestet.
+       
+    */
     for (decimal = 0, display = 1; decimal < 16777216; decimal++)
     {
       if (verify_conversion(decimal) != 0)
       {
         return EXIT_FAILURE;
       }
-      /* FRAGE 4: Wozu dient diese if-Anweisung? */
+      /* FRAGE 4: Wozu dient diese if-Anweisung? 
+      
+      ANTWORT: Um nur die bedingten Anweisungen durchzuführen wenn 'decimal' eine 2er Potenz ist
+      */
       if (display == decimal)
       {
         char *this_bitvector = decimal2bitvector(decimal);
@@ -98,7 +116,10 @@ int main(int argc,char *argv[0])
       }
     }
     /* FRAGE 5: Aus welchem Wertebereich stammen die Zahlen, f"ur die
-       in der folgenden Schleife Tests durchgef"uhrt werden? */
+       in der folgenden Schleife Tests durchgef"uhrt werden? 
+       
+    ANTWORT: Die Zahl muss aus dem Wertebereich zwischen 1 und 2^32-1 (UINT_MAX) kommen
+    */
     srand48(366292341);
     for (trial = 0; trial < 100; trial++)
     {
@@ -112,7 +133,10 @@ int main(int argc,char *argv[0])
   {
     int idx;
     /* FRAGE 6: F"ur welche Strings werden in der folgenden Zeile
-       Tests durchgef"uhrt? */
+       Tests durchgef"uhrt? 
+       
+       ANTWORT: Für alle Parameter die bei Start mit übergeben werden, ausser argv[0].
+       */
     for (idx = 1; idx < argc; idx++)
     {
       unsigned int decimal;
