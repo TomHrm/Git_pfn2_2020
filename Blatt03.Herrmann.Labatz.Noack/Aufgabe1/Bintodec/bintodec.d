@@ -1,1 +1,0 @@
-bintodec.o: bintodec.c
