@@ -13,7 +13,7 @@
 char *decimal2bitvector(unsigned int n)
 {
     char *bitvector;
-
+    
     bitvector = (char*) malloc(BITVECTOR_MAX_WIDTH+1);
     for (int i = 0, potenz = NUMOFBITS - 1; i <= BITVECTOR_MAX_WIDTH; i++)
     {
