@@ -15,6 +15,11 @@ char *decimal2bitvector(unsigned int n)
     char *bitvector;
     
     bitvector = (char*) malloc(BITVECTOR_MAX_WIDTH+1);
+     if (bitvector == NULL)
+  {
+    fprintf(stderr, "malloc failed: %d", BITVECTOR_MAX_WIDTH);
+    exit(EXIT_FAILURE);
+  }
     for (int i = 0, potenz = NUMOFBITS - 1; i <= BITVECTOR_MAX_WIDTH; i++)
     {
         if (i % 9 == 8)
@@ -43,7 +48,8 @@ char *decimal2bitvector(unsigned int n)
 
 int bitvector_validate(const char *bitvector)
 {
-  if ( !(NUMOFBITS <= strlen(bitvector) && strlen(bitvector) <= BITVECTOR_MAX_WIDTH))
+  if ( !(NUMOFBITS <= strlen(bitvector) && 
+    strlen(bitvector) <= BITVECTOR_MAX_WIDTH))
   {
     fprintf(stderr,"Ungueltige Eingabe Laenge.\n");
     return -1;
