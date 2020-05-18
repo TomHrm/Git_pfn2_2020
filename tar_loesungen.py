@@ -54,7 +54,7 @@ def names_get(names_file):
   names = list()
   for line in stream:
     name = line.rstrip()
-    if not re.search(r'^[A-Z][a-z\-_]+$',name):
+    if not re.search(r'^[A-Za-z][A-Za-z\-_]+$',name):
       sys.stderr.write(('{}: der Name {} in der Datei enthaelt nicht erlaubte '
                         'Zeichen.\n')
                         .format(sys.argv[0],name))
