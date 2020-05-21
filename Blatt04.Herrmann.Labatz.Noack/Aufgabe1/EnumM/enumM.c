@@ -9,9 +9,9 @@
 
 int main(int argc, char *argv[])
 {
-  int n; //die Obergrenze der Menge M
-  int steps = 0; //die Anzahl der Schritte
-  if(argc != 2 || (sscanf(argv[1], "%u", &n)) != 1)
+  unsigned long n; //die Obergrenze der Menge M
+  unsigned long steps = 0; //die Anzahl der Schritte
+  if(argc != 2 || (sscanf(argv[1], "%lu", &n)) != 1)
   {
   fprintf(stderr, "Ungültiges Argument");
   exit(EXIT_FAILURE);
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         printf("%d\n", i);
         if((2*i+1) <= n)
         {
-          arr[2*i+1] = 1;
+	          arr[2*i+1] = 1;
         }
         
         if((2*i+1) <= n)
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
   steps++; //Freigabe von Speicherplatz
   free(arr); 
   
-  printf("#%d\t%d\n", n, steps);
+  printf("#%lu\t%lu\n", n, steps);
   
 return EXIT_SUCCESS;
 }
