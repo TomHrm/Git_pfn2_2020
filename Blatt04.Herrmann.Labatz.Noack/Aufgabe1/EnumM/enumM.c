@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
   unsigned long n; //die Obergrenze der Menge M
   unsigned long steps = 0; //die Anzahl der Schritte
-  if(argc != 2 || (sscanf(argv[1], "%lu", &n)) != 1)
+  if(argc != 2 || (	sscanf(argv[1], "%lu", &n)) != 1)
   {
   fprintf(stderr, "Ungültiges Argument");
   exit(EXIT_FAILURE);
@@ -31,19 +31,19 @@ int main(int argc, char *argv[])
       steps += 2; //if, Indexzugriff
       if(arr[i] == 1) 
       {
-      	steps += 3; 
+      	steps += 3; // Arithmetik, Test
         printf("%d\n", i);
         if((2*i+1) <= n)
         {
 	          arr[2*i+1] = 1;
-	          steps += 4;
+	          steps += 4; //Wertzuweisung, Indexzugriff, Arithmetik
         } 
-        
-        steps += 3;
+
+        steps += 3; // Arithmetik ,Test
         if((3*i+1) <= n)
         {
           arr[3*i+1] = 1;
-          steps += 4;
+          steps += 4; // Arithmetik,Indexzugriff, wertzuweisung
         }
         
       }
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     steps++; //Wertzuweisung
     i++;
     
-  } //n*20 Steps für n Schleifendurchläufe
+  } //n Steps für n Schleifendurchläufe
   steps += n; 
   
   
