@@ -16,8 +16,7 @@ int main(int argc, char *argv[])
   fprintf(stderr, "Ungültiges Argument");
   exit(EXIT_FAILURE);
   }
-  char *arr; 
-  arr = (char*) malloc(n/8+1);
+  char *arr = calloc(n, sizeof 'a');
   //Char-Array mit Kapazität, in dem '1' Index 
   //eines in M enthaltenen Elementes steht, sonst '0'
 

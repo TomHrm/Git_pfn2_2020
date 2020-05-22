@@ -1,4 +1,4 @@
-.PHONY:test
+ .PHONY:test
 CC?=clang
 CFLAGS=-g -m64 -Wall -Werror -Wunused-parameter -Wunused-variable -O3
 FILE_BASE=hanoi
