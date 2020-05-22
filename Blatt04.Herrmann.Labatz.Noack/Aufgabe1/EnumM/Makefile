@@ -24,8 +24,8 @@ steps.tsv:${FILE_BASE}.x
 	@./steps.sh 500 > $@
 
 # You need to provide your own values for a and b, such that runs with success
-value_a=120
-value_b=9
+value_a=60
+value_b=8
 test_fit:steps.tsv
 	@./fit_linear.py -a ${value_a} -b ${value_b} --inputfile steps.tsv 
 	@echo "Congratulations. $@ passed"

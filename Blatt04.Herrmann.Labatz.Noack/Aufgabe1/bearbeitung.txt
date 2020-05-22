@@ -3,19 +3,22 @@
 # Aufgabe aufgewendet haben. Das k"onnen auch Flie"spunkt-Werte sein,
 # also z.B.  1.5, wenn Sie 1 Stunde und 30 Minuten ben"otigt haben.
 
-Bearbeitungszeit: <h> Stunden
+Bearbeitungszeit: <3> Stunden
 
 # Als n"achstes tragen Sie bitte ein, wie schwierig
 # Sie die Aufgabe fanden. Die m"oglichen Werte sind vorgegeben. Bitte
 # die Werte streichen, die nicht zutreffen:
 
-Schwierigkeitsgrad: leicht, mittelschwer, genau richtig, schwer, sehr schwer
+Schwierigkeitsgrad: genau richtig
 
 # Schliesslich tragen Sie bitte ein, wie verst"andlich die
 # Aufgabenstellung formuliert war. Die m"oglichen Werte sind vorgegeben.
 # Bitte die Werte streichen, die nicht zutreffen.
 
-Aufgabenstellung: vollkommen klar, weitgehend klar, weniger klar, unklar
+Aufgabenstellung: unklar
 
 # Falls eine der beiden letzten Kategorien zutrifft, bitte
 # kurz angeben, worin die Unklarheiten bestehen.
+
+Numpy war standartmäßig nicht installiert und dies hat bei uns Probleme hervorgerufen und ohne grundlegender Python Ahnung wäre das beheben schwerer gewesen.
+Die Tests haben bei unserer Gruppe nur auf einem Mac Rechner funktioniert, auf Linux hat es überhaupt nicht funktioniert.

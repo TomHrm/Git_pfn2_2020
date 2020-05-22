@@ -1,24 +1,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int hanoimoves(n)
+void hanoimoves(short groese, short start, short end)
 {
-    
+    if(groese > 1)
+    {
+        hanoimoves(groese - 1, start , 6 - start - end);
+        printf("(%i,%i) ",start, end);
+        hanoimoves(groese - 1, 6 - start - end , end);
+    }
+    else
+    {
+        printf("(%i,%i) ",start, end);
+    }
 }
 
 int main(int argc, char const *argv[])
 {
-    if (argc != 2) {
-        fprintf(stderr, "%s: falsche Argumentennummer.\n", argv[0]);
+    short n;
+    if (argc != 2 || sscanf(argv[1], "%hi", &n) != 1 || n <= 0) {
+        fprintf(stderr, "%s: wähle ein Argument\n", argv[0]);
         return EXIT_FAILURE;
     }
 
-    int n;
-    if (sscanf(argv[1], "%d", &n) != 1 || n <= 0) {
-        fprintf(stderr, "%s: nicht positiv.\n", argv[0]);
-        return EXIT_FAILURE;
-    }
+    hanoimoves(n, 1, 2);
 
+    printf("\n");
     
     return EXIT_SUCCESS;
 }

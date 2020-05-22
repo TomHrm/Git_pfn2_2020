@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-
-
-
-
-
 int main(int argc, char *argv[])
 {
   unsigned long n; //die Obergrenze der Menge M
@@ -16,44 +11,48 @@ int main(int argc, char *argv[])
   fprintf(stderr, "Ungültiges Argument");
   exit(EXIT_FAILURE);
   }
-  char *arr = calloc(n, sizeof 'a');
+  char *arr = calloc(n, sizeof *arr);
   //Char-Array mit Kapazität, in dem '1' Index 
   //eines in M enthaltenen Elementes steht, sonst '0'
 
   int i = 1; //Laufvariable
   arr[i] = 1;
 
-  steps +=4; //zuweisungen
-  steps +=3; //Funktionsaufrufe
+  steps += 4; //zuweisungen
+  steps += 3; //Funktionsaufrufe
   
   //bis hier eh O(1)...
   
   
   while(i <= n)
     {
-      steps ++; //vergleich
+      steps++; //vergleich
       
-      steps+=2; //if, Indexzugriff
+      steps += 2; //if, Indexzugriff
       if(arr[i] == 1) 
       {
+      	steps += 3; 
         printf("%d\n", i);
         if((2*i+1) <= n)
         {
 	          arr[2*i+1] = 1;
-        }
+	          steps += 4;
+        } 
         
-        if((2*i+1) <= n)
+        steps += 3;
+        if((3*i+1) <= n)
         {
           arr[3*i+1] = 1;
+          steps += 4;
         }
-        steps += 16; //wenn in schleife gegangen, für various
+        
       }
     
     steps++; //Wertzuweisung
     i++;
     
   } //n*20 Steps für n Schleifendurchläufe
-  steps += (n*i); 
+  steps += n; 
   
   
   steps++; //Freigabe von Speicherplatz
