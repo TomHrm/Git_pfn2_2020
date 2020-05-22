@@ -12,6 +12,9 @@ Pfn 2 im Jahr 2020 bei prof. kurz
 
 ## PFN
 
+## Commits
+Commit messages should start with "Issue #x - foo; bar", where x is the issue number, foo is the issue description and bar is a change description
+
 ## How to Clone
 Um Zum clonen git clone https://github.com/TomHrm/Git_pfn2_2020
 
