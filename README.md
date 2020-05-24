@@ -5,14 +5,14 @@
 2. [Commits](#Commits)
 3. [Clonen](#Clonen)
 4. [Pushen](#Pushen))
-5. [Packen als tar.gz](#Packen als tar.gz)
+5. [Packen als tar.gz](#packen-als-targz)
 
 ## Beschreibung
 Pfn 2 im SoSe 2020 bei Prof. Kurtz.  
 Gruppenarbeitsordner von Tom Herrmann, Dominick Labatz, Christoph Noack
 
 ## Commits
-Sollten eine einigermaßen sinnvolle Commitnachricht enthalten.
+Sollten eine sinnvolle Commitnachricht enthalten.
 
 ## Clonen
 git clone https://github.com/TomHrm/Git_pfn2_2020
