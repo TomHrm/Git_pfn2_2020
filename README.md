@@ -1,11 +1,11 @@
 # Pfn2_2020
 
 ## Contents
-1. [Beschreibung](#Beschtestreibung)
-2. [Comtestmits](#Commits)
+1. [Beschreibung](#Beschreibung)
+2. [Commits](#Commits)
 3. [Clonen](#Clonen)
 4. [Pushen](#Pushen))
-5. [Packen als tar.gz](#Packen als tar.gz))
+5. [Packen als tar.gz](#Packen als tar.gz)
 
 ## Beschreibung
 Pfn 2 im SoSe 2020 bei Prof. Kurtz.  
