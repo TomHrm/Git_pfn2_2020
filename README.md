@@ -4,7 +4,7 @@
 1. [Beschreibung](#Beschreibung)
 2. [Commits](#Commits)
 3. [Clonen](#Clonen)
-4. [Pushen](#Pushen))
+4. [Pushen](#Pushen)
 5. [Packen als tar.gz](#packen-als-targz)
 
 ## Beschreibung
