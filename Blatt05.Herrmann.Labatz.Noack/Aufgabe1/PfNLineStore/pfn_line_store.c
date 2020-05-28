@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <assert.h>
 #include <string.h>
-#define STAMP printf("line: %d\n",__LINE__ )
 
 struct PfNLineStore
 {
@@ -17,37 +16,31 @@ PfNLineStore *pfn_line_store_new(unsigned char *file_contents, size_t size, char
 {
    PfNLineStore * result;
    result = malloc(sizeof(*result));
-   STAMP;
    if(result == NULL)
    {
    	fprintf(stderr, "pfn_line_store.c: malloc(%lu) failed", sizeof(PfNLineStore));
    	exit(EXIT_FAILURE);
    }
    result -> nextfree = 0;
-   STAMP;
    result -> lines = NULL;
    size_t allocated = 0;
    unsigned int linestartidx = 0; //Position des zuletzt einelgesenen Linebreak
 
    for(unsigned int i = 0; i < size; i++)
    {
-    STAMP;
        if(file_contents[i] == sep)
        {
-        STAMP;
        	file_contents[i] = '\0';
        	//result -> lines[counter+1] = (PfNLine) nextline;
        	if(allocated <= result -> nextfree)
        	{
-            STAMP;
             allocated += (allocated * 0.2)+ 32;
-            result = realloc(result, allocated * (sizeof *result));
+            result -> lines = realloc(result -> lines, allocated * (sizeof *result->lines));
             assert(result != NULL);
        	}
         result ->lines[result -> nextfree] = (PfNLine) &file_contents[linestartidx];
         linestartidx = i+1;
         result -> nextfree++;
-        
        }
    }
    result -> separator = sep;
@@ -92,13 +85,3 @@ void pfn_line_store_show(const PfNLineStore *pfn_line_store)
    	printf("%s\n",pfn_line_store->lines[n]);
    }
 }
-
-/*
-int main(void)
-{
-	unsigned char teststring[100]; 
-	strcpy((char*) teststring,  "dkjghdgl\ndfgdf\n");
-	struct PfNLineStore * test = pfn_line_store_new(teststring, strlen((char*) teststring) ,'\n');
-	printf("%zu\n",test->nextfree);
-}
-*/

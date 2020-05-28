@@ -31,7 +31,7 @@ test:test_l test_r test_o
 
 test_l:${MAIN}
 	$(eval TMPFILE := $(shell mktemp))
-	@wc -l *.[ox] ${TEXTFILES} > ${TMPFILE}
+	@wc -l *.[ox] ${TEXTFILES} | sed -e 's/insgesamt/total/' > ${TMPFILE}
 	@${MAIN} -l *.[ox] ${TEXTFILES} | diff -w - ${TMPFILE}
 	@${RM} ${TMPFILE}
 	@echo "Congratulations. $@ passed"
