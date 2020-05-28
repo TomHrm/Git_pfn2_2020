@@ -21,7 +21,7 @@ static void usage(const char *progname,bool show_options)
 
 /* FRAGE 1: Wozu dient die Struktur PfNLineStoreOptions? 
 Speichern der Flags die aufgerufen werden. 
-Und speichern der Dateinamen die überprüft werden sollen.
+Und speichern der Dateinamen die "uberpr"uft werden sollen.
 */
 
 typedef struct
@@ -49,7 +49,7 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
      dass Sie das Manual zu getopt konsultieren. Die Antwort ergibt sich aus dem
      Kontext. 
      
-     Die while schleife itteriert über alle angegebenen Flags und speichert die
+     Die while schleife itteriert "uber alle angegebenen Flags und speichert die
      Info je nach dem was es ist, in die Store Struktur.
      
      */  
@@ -87,7 +87,7 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
     /* FRAGE 4: Wo wird die Variable optind deklariert und
        welche Bedeutung hat sie? 
        
-       Sie wird in der unistd.h deklariert und stellt den Index des nächsten Elementes in argv da.
+       Sie wird in der unistd.h deklariert und stellt den Index des n"achsten Elementes in argv da.
        */
     if (optind < argc)
     {
@@ -121,7 +121,7 @@ static void pfn_line_store_options_delete(PfNLineStoreOptions *options)
    FRAGE 5: Wie sieht in der folgenden Funktion die Ausgabe des
    Dateiinhalts in Abh"angigkeit der beiden boolschen-Parameter aus?
    
-   EIne direkte Ausgabe findet nicht statt. Es wird lediglich der Zeileninhalt
+   Eine direkte Ausgabe findet nicht statt. Es wird lediglich der Zeileninhalt
    je nach Boolean umgedreht.
    
    Jede Zeile wird einzeln ungedreht aber der Text ansich nicht. 
@@ -131,7 +131,7 @@ static void pfn_line_store_options_delete(PfNLineStoreOptions *options)
    FRAGE 6: Welche Abstraktion wird in der folgenden Funktion verwendet,
    damit man die "au"sere Schleife nur einmal schreiben muss?
    
-   Das sämtliche Argumente von FOR-Schleifen optional sind.
+   Das s"amtliche Argumente von FOR-Schleifen optional sind.
    
 */
 
