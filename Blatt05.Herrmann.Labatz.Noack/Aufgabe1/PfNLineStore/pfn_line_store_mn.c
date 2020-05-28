@@ -19,7 +19,10 @@ static void usage(const char *progname,bool show_options)
           show_options ? optionsmsg : "Use -h for more information.");
 }
 
-/* FRAGE 1: Wozu dient die Struktur PfNLineStoreOptions? */
+/* FRAGE 1: Wozu dient die Struktur PfNLineStoreOptions? 
+Speichern der Flags die aufgerufen werden. 
+Und speichern der Dateinamen die überprüft werden sollen.
+*/
 
 typedef struct
 {
@@ -44,7 +47,12 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
   /* FRAGE 2: Was passiert in der folgenden while-Schleife? Sie m"ussen
      hier keine technischen Details beschreiben, und es ist nicht notwendig,
      dass Sie das Manual zu getopt konsultieren. Die Antwort ergibt sich aus dem
-     Kontext. */
+     Kontext. 
+     
+     Die while schleife itteriert über alle angegebenen Flags und speichert die
+     Info je nach dem was es ist, in die Store Struktur.
+     
+     */  
   while ((opt = getopt(argc, argv, "lroh")) != -1)
   {
     switch ((char) opt)
@@ -60,7 +68,11 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
         break;
       case 'h':
         usage(argv[0], true);
-        /* FRAGE 3: Wozu wird die Variable haserr verwendet? */
+        /* FRAGE 3: Wozu wird die Variable haserr verwendet? 
+        
+        Sie wird bei einer fehlerhaften Eingabe ODER bei der Flag -h gespeichert und gibt die Hilfemeldung aus.
+        Ausserdem wird dann der Speicher wieder freigegeben und das Programm beendet.
+        */
         haserr = true;
         break;
       default:
@@ -73,7 +85,10 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
   if (!haserr)
   {
     /* FRAGE 4: Wo wird die Variable optind deklariert und
-       welche Bedeutung hat sie? */
+       welche Bedeutung hat sie? 
+       
+       Sie wird in der unistd.h deklariert und stellt den Index des nächsten Elementes in argv da.
+       */
     if (optind < argc)
     {
       options->filenames = (const char * const *) (argv + optind);
@@ -105,8 +120,19 @@ static void pfn_line_store_options_delete(PfNLineStoreOptions *options)
    wieder aus.
    FRAGE 5: Wie sieht in der folgenden Funktion die Ausgabe des
    Dateiinhalts in Abh"angigkeit der beiden boolschen-Parameter aus?
+   
+   EIne direkte Ausgabe findet nicht statt. Es wird lediglich der Zeileninhalt
+   je nach Boolean umgedreht.
+   
+   Jede Zeile wird einzeln ungedreht aber der Text ansich nicht. 
+   Bei reversed_order:
+   Der gesammte Text wird umgedreht.
+   
    FRAGE 6: Welche Abstraktion wird in der folgenden Funktion verwendet,
    damit man die "au"sere Schleife nur einmal schreiben muss?
+   
+   Das sämtliche Argumente von FOR-Schleifen optional sind.
+   
 */
 
 static void show_lines_generic(const PfNLineStore *line_store,
