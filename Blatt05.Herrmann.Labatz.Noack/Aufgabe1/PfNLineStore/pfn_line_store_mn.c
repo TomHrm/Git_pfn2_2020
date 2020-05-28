@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "pfn_file_info.h"
 #include "pfn_line_store.h"
+#define STAMP printf("file: %s,line: %d\n",__FILE__ , __LINE__ )
 
 static void usage(const char *progname,bool show_options)
 {
@@ -158,27 +159,31 @@ static void show_lines_generic(const PfNLineStore *line_store,
 
 int main(int argc,char *argv[])
 {
+  STAMP;
   unsigned long idx;
   size_t total_lines = 0;
   PfNLineStoreOptions *options
     = pfn_line_store_options_new(argc,(char *const *) argv);
   bool haserr = false;
-
+  STAMP;
   if (options == NULL)
   {
     return EXIT_FAILURE;
   }
+  STAMP;
   for (idx = 0; idx < options->num_of_files; idx++)
   {
+    STAMP;
     PfNFileInfo *file_info
       = pfn_file_info_new(argv[0],options->filenames[idx]);
     size_t file_size, num_lines = 0;
-
+  STAMP;
     if (file_info == NULL)
     {
       return EXIT_FAILURE;
     }
     file_size = pfn_file_info_size(file_info);
+    STAMP;
     if (file_size > 0)
     {
       PfNLineStore *line_store;

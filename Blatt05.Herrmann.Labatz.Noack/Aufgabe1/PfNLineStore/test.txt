@@ -1,0 +1,17 @@
+      21 pfn_file_info.o
+      27 pfn_line_store.o
+      12 pfn_line_store.x
+      22 pfn_line_store_mn.o
+      23 pfn_line_store_mn.x
+      95 pfn_file_info.c
+       3 pfn_file_info.d
+      15 pfn_file_info.h
+     105 pfn_line_store.c
+       3 pfn_line_store.d
+      25 pfn_line_store.h
+     217 pfn_line_store_mn.c
+       5 pfn_line_store_mn.d
+       0 emptyfile.txt
+       1 singlechar.txt
+       1 twochars.txt
+     575 total
