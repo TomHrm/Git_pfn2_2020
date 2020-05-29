@@ -1,4 +1,0 @@
-.o
-.x
-.x.dSYM __pycache__
-.DS_Store
