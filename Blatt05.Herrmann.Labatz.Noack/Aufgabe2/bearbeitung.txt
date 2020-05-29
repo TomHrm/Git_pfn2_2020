@@ -3,19 +3,22 @@
 # Aufgabe aufgewendet haben. Das k"onnen auch Flie"spunkt-Werte sein,
 # also z.B.  1.5, wenn Sie 1 Stunde und 30 Minuten ben"otigt haben.
 
-Bearbeitungszeit: <h> Stunden
+Bearbeitungszeit: <1> Stunden
 
 # Als n"achstes tragen Sie bitte ein, wie schwierig
 # Sie die Aufgabe fanden. Die m"oglichen Werte sind vorgegeben. Bitte
 # die Werte streichen, die nicht zutreffen:
 
-Schwierigkeitsgrad: leicht, mittelschwer, genau richtig, schwer, sehr schwer
+Schwierigkeitsgrad: genau richtig
 
 # Schliesslich tragen Sie bitte ein, wie verst"andlich die
 # Aufgabenstellung formuliert war. Die m"oglichen Werte sind vorgegeben.
 # Bitte die Werte streichen, die nicht zutreffen.
 
-Aufgabenstellung: vollkommen klar, weitgehend klar, weniger klar, unklar
+Aufgabenstellung: weitgehend klar
 
 # Falls eine der beiden letzten Kategorien zutrifft, bitte
 # kurz angeben, worin die Unklarheiten bestehen.
+
+Es war nicht komplett klar in was für einen Format sie die Rekursion sehen wollen.
+Deswegen haben wir auch 2 Lösungen implementiert die am ende aber trotzdem auf den gleichen Ansatz zurückgekommen sind.
