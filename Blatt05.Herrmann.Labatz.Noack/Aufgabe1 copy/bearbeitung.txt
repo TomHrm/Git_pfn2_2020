@@ -9,7 +9,7 @@ Bearbeitungszeit: <4> Stunden
 # Sie die Aufgabe fanden. Die m"oglichen Werte sind vorgegeben. Bitte
 # die Werte streichen, die nicht zutreffen:
 
-Schwierigkeitsgrad: genau richtig
+Schwierigkeitsgrad: mittelschwer
 
 # Schliesslich tragen Sie bitte ein, wie verst"andlich die
 # Aufgabenstellung formuliert war. Die m"oglichen Werte sind vorgegeben.

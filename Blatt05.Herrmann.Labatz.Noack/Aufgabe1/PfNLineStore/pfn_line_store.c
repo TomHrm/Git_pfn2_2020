@@ -16,11 +16,13 @@ PfNLineStore *pfn_line_store_new(unsigned char *file_contents, size_t size, char
 {
    PfNLineStore * result;
    result = malloc(sizeof(*result));
+
    if(result == NULL)
    {
    	fprintf(stderr, "pfn_line_store.c: malloc(%lu) failed", sizeof(PfNLineStore));
    	exit(EXIT_FAILURE);
    }
+   
    result -> nextfree = 0;
    result -> lines = NULL;
    size_t allocated = 0;
