@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <math.h>
 #include "binsearch_interval.h"
+#include <stdio.h>
 
 /*
    compare two double values. If their absolute difference is smaller
@@ -62,6 +63,35 @@ const Basetype *binsearch(const Basetype *array,size_t length,Basetype key)
 const Basetype *binsearch_gt_leq(const Basetype *array,size_t length,
                                  Basetype key)
 {
+  //printf("größte kleiner als key, h = %.4f, länge = %ld \n", key, length);
+  //fflush(stdout);
+  size_t left = 0, right = length -1;
+  assert(length > 0);
+  size_t mid;
+  size_t latest_hit = length;
+  while(left <= right)
+  {
+    mid = left + (right - left)/2;
+    int cmp = basetype_compare(key, array[mid]);//=1 wenn key > array[mid]
+    //printf("mid: %ld, left: %ld, right: %ld \n" , mid, left, right);
+    
+    if(cmp < 0) // key < array[mid]
+    {
+      if(mid == 0) break;
+      right = mid -1;
+      //printf("mid: %ld, left: %ld, right: %ld \n" , mid, left, right);
+      
+    } else
+    {
+      latest_hit = mid;
+
+      left = mid + 1;
+      //printf("mid: %ld, left: %ld, right: %ld \n" , mid, left, right);
+    }
+  } 
+  if(latest_hit == length) return NULL;
+  //printf("ergebnis: %ld\n",latest_hit);
+  return &array[latest_hit]; //nischt jefunden
 }
 
 /* In the array with length elements return a pointer to the smallest
@@ -72,6 +102,33 @@ const Basetype *binsearch_gt_leq(const Basetype *array,size_t length,
 const Basetype *binsearch_sm_geq(const Basetype *array,size_t length,
                                  Basetype key)
 {
+  //printf("kleinste größer als key, l = %.4f \n", key);
+  //fflush(stdout);
+  if(key > array[length -1]) return NULL;
+  size_t left = 0, right = length -1;
+  assert(length > 0);
+  size_t mid;
+  size_t latest_hit = length;
+  while(left <= right)
+  {
+    mid = left + (right - left)/2;
+    int cmp = basetype_compare(key, array[mid]);//=1 wenn key > array[mid]
+ 
+    if(cmp <= 0) // key < array[mid]
+    {
+      if(mid == 0) break;
+      latest_hit = mid;
+      right = mid -1;
+      
+    } else
+    {
+      left = mid + 1;
+    }
+  }
+    if(latest_hit == length) return NULL;
+    //printf("ergebnis: %ld\n",mid);
+    return &array[latest_hit]; //nischt jefunden
+  
 }
 
 /* Determine index range in array of length elements.
@@ -90,37 +147,58 @@ Indexrange binsearch_interval(const Basetype *array,size_t length,
   if (basetype_compare(low,high) > 0)
   {
     /* Frage 1: Welcher Fall tritt hier auf und wof"ur steht der
-       return-Wert? */
+       return-Wert?
+       Die untere Intervallgrenze ist größer als die obere Intervallgrenze. 
+       Der Return- Wert ist die leere 'index range'*/
     return ir;
   }
+  
   leftptr = binsearch_sm_geq(array,length,low);
   if (leftptr == NULL)
   {
-    /* Frage 2: Welcher Fall tritt hier auf? */
+    /* Frage 2: Welcher Fall tritt hier auf? 
+    Die untere Intervallgrenze ist größer als das größte Element im Array*/
     assert (basetype_compare(low,array[length-1]) > 0);
     return ir;
   }
   /* Frage 3: Wieso erfolgt die folgende binaere Suche nach der rechten Grenze
               nicht im kompletten Array, sondern im Speicherbereich
               mit (length - (size_t) (leftptr - array)) Elementen, auf den
-              leftptr verweist? */
+              leftptr verweist?
+              Aus dem rechten Bereich wird die Grenze so herunteresetzt, 
+              dass Berechnungen auf dem Teilintervall größer der rechten Intervallgrenze
+              nicht ausgef"uhrt werden und so Berechnungszeit gespart wird.*/
+              
   rightptr = binsearch_gt_leq(leftptr,length - (size_t) (leftptr - array),high);
   if (rightptr == NULL)
   {
-    /* Frage 4: Welcher Fall tritt hier auf? */
+    /* Frage 4: Welcher Fall tritt hier auf?
+                Es wird geprüft, ob die obere Intervallgrenze kleiner als das
+                kleinste Element aus dem Array ist. */
+                
     assert (basetype_compare(high,*leftptr) < 0);
     return ir;
   }
-  /* Frage 5: Warum ist diese Assertion hier sinnvoll? */
+  /* Frage 5: Warum ist diese Assertion hier sinnvoll?
+              Es wird sichergestellt, dass außerhalb des gefundenen Intervalls
+              keine Werte mehr kleiner als low sind */
   assert (leftptr == array || basetype_compare(*(leftptr-1),low) < 0);
-  /* Frage 6: Warum ist diese assertion hier sinnvoll? */
+  /* Frage 6: Warum ist diese assertion hier sinnvoll?
+              Es wird sichergestellt, dass außerhalb des gefundenen Intervalls
+              keine Werte mehr größer als high sind */
+              
   assert (rightptr == array + length - 1 ||
           basetype_compare(*(rightptr+1),high) > 0);
   for (ptr = leftptr; ptr <= rightptr; ptr++)
   {
-    /* Frage 7: Warum ist diese Assertion hier sinnvoll? */
+    /* Frage 7: Warum ist diese Assertion hier sinnvoll?
+                Es wird überprüft, ob rechts von leftptr auf dem Array noch
+                Werte <low existieren*/
+                
     assert(basetype_compare(*ptr,low) >= 0);
-    /* Frage 8: Warum ist diese Assertion hier sinnvoll? */
+    /* Frage 8: Warum ist diese Assertion hier sinnvoll?
+                Es wird überprüft, ob links von rightptr auf dem Array noch
+                Werte >high existieren*/
     assert(basetype_compare(*ptr,high) <= 0);
   }
   ir.i = (size_t) (leftptr - array);

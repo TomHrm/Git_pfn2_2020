@@ -202,6 +202,10 @@ int main(int argc,char *argv[])
     return EXIT_FAILURE;
   }
   array = generate_array(options->length,options->expected_distance);
+  /*for(int i = 0; i < options -> length; i++)
+  {
+	  printf("%d %.8f\n", i, array[i]);
+  }*/
   irange_sizes = malloc(options->searches * sizeof *irange_sizes);
   assert (irange_sizes != NULL);
   last_element = array[options->length-1];
