@@ -11,7 +11,8 @@
    repr"asentieren.
    FRAGE 1: Warum kann man hierf"ur nicht die C-Funktion strcmp verwenden?
    
-   ANTWORT: Die strcmp Funktion vergleicht zwei Strings und beachtet Leerzeichen. 
+   ANTWORT:
+   Die strcmp Funktion vergleicht zwei Strings und beachtet Leerzeichen.
    Bitvektoren können Leeerzeichen enthalten oder auch nicht.
    Der gleiche String würde bei unterschiedlichen Schreibweisen unterschiedlich
    ausgewertet werden.
@@ -105,7 +106,8 @@ int main(int argc,char *argv[0])
       }
       /* FRAGE 4: Wozu dient diese if-Anweisung? 
       
-      ANTWORT: Um nur die bedingten Anweisungen durchzuführen wenn 'decimal' eine 2er Potenz ist
+      ANTWORT: Um nur die bedingten Anweisungen durchzuführen wenn 'decimal'
+      eine 2er Potenz ist.
       */
       if (display == decimal)
       {
@@ -118,7 +120,8 @@ int main(int argc,char *argv[0])
     /* FRAGE 5: Aus welchem Wertebereich stammen die Zahlen, f"ur die
        in der folgenden Schleife Tests durchgef"uhrt werden? 
        
-    ANTWORT: Die Zahl muss aus dem Wertebereich zwischen 1 und 2^32-1 (UINT_MAX) kommen
+    ANTWORT: Die Zahl muss aus dem Wertebereich zwischen
+    1 und 2^32-1 (UINT_MAX) kommen.
     */
     srand48(366292341);
     for (trial = 0; trial < 100; trial++)
@@ -135,7 +138,8 @@ int main(int argc,char *argv[0])
     /* FRAGE 6: F"ur welche Strings werden in der folgenden Zeile
        Tests durchgef"uhrt? 
        
-       ANTWORT: Für alle Parameter die bei Start mit übergeben werden, ausser argv[0].
+       ANTWORT: Für alle Parameter die bei Start mit übergeben werden,
+       ausser argv[0].
        */
     for (idx = 1; idx < argc; idx++)
     {

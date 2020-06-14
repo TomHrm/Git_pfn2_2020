@@ -3,7 +3,8 @@
 #include <assert.h>
 #include <regex.h>
 
-unsigned long gaussSumme(unsigned long zahl) //Berechnet die Summe aller natürlichen Zahlen von 0 bis @param zahl
+unsigned long gaussSumme(unsigned long zahl) //Berechnet die Summe aller 
+                                // natürlichen Zahlen von 0 bis @param zahl
 {
 	return ((zahl *(zahl +1))/2);
 	//return 3 + zahl;
@@ -13,7 +14,8 @@ int main(int argc, char *argv[])
 {
 	long sign_m;
 	long sign_n;
-	if(argc != 3 || (sscanf(argv[1],"%ld",&sign_m) !=1 ) || (sscanf(argv[2],"%ld",&sign_n)) != 1 )
+	if(argc != 3 || (sscanf(argv[1], "%ld", &sign_m) !=1 ) ||
+	               (sscanf(argv[2], "%ld", &sign_n)) != 1 )
 	{
 		printf("Parameter-zahl oder form ungültig \n");
 		exit(EXIT_FAILURE);

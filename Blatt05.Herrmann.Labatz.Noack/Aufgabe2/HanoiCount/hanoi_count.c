@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static int hanoi_rec_count(int num_of_disks, int from_pole, int to_pole, int count)
+static int hanoi_rec_count(int num_of_disks, int from_pole,
+                           int to_pole, int count)
 {
   if (num_of_disks > 0)
   {
@@ -27,10 +28,11 @@ static int hanoi_rec_count(int num_of_disks, int from_pole, int to_pole, int cou
 
 static void hanoimoves(int num_of_disks)
 {
-  const int from_pole = 1,
-            to_pole = 2;
+  const int from_pole = 1, to_pole = 2;
 
-  printf("%d\t%d\n", num_of_disks, hanoi_rec_count(num_of_disks, from_pole, to_pole,0));
+  printf("%d\t%d\n", num_of_disks, hanoi_rec_count(num_of_disks,
+                                                   from_pole,
+                                                   to_pole,0));
 }
 
 int main(int argc, char *argv[])
