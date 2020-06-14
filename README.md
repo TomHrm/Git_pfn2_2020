@@ -27,6 +27,7 @@ git push
 "BlattXX.NAME1.NAME2.NAME3"
 2. Die Verzeichnisse aufräumen. Einerseits mit "make clean" und unnötige Dateien löschen.
 3. Darauf achten dass die Bearbeitungen.txt ausgefüllt ist.
-4. Abschließend zum erstellen der Abgabe lediglich die "tar_loesungen.py" mit der Übungsnummer als Argument angeben.
+4. "code_check.py" mit der bearbeiteten Lösung als Argument aufrufen und überprüfen bis keine "Regelverletzung" mehr vorliegt.
+5. Abschließend zum erstellen der Abgabe lediglich die "tar_loesungen.py" mit der Übungsnummer als Argument angeben.
 Z.B "tar_loesungen.py 2" zum automatischen packen des Zweiten Übungsblattes.
-5. Die tar.gz Datei per Email an: kurtz@zbh.uni-hamburg.de schicken.
+6. Die tar.gz Datei per Email an: kurtz@zbh.uni-hamburg.de schicken.

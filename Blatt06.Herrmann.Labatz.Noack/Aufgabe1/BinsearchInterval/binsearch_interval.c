@@ -166,8 +166,9 @@ Indexrange binsearch_interval(const Basetype *array,size_t length,
               mit (length - (size_t) (leftptr - array)) Elementen, auf den
               leftptr verweist?
               Aus dem rechten Bereich wird die Grenze so herunteresetzt, 
-              dass Berechnungen auf dem Teilintervall größer der rechten Intervallgrenze
-              nicht ausgef"uhrt werden und so Berechnungszeit gespart wird.*/
+              dass Berechnungen auf dem Teilintervall größer der rechten
+              Intervallgrenze nicht ausgef"uhrt werden und so
+              Berechnungszeit gespart wird.*/
               
   rightptr = binsearch_gt_leq(leftptr,length - (size_t) (leftptr - array),high);
   if (rightptr == NULL)
