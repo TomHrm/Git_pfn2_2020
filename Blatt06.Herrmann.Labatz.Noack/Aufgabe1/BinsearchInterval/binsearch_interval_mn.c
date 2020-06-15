@@ -149,11 +149,14 @@ static void show_irange_sizes(unsigned long *irange_sizes,
     unsigned long count = 1, idx;
 
     /* Frage A: In welcher Reihenfolge werden hier die Elemente
-       sortiert und wodurch entsteht diese Reihenfolge? */
+       sortiert und wodurch entsteht diese Reihenfolge?
+			 Antwort A: Elemente werden nach absteigender Reihenfolge sortiert
+			 über die Funtion compare_unsigned_long()*/	
     qsort(irange_sizes,num_values,sizeof *irange_sizes,
           compare_unsigned_long);
     /* Frage B: Was berechnet die folgende Schleife auf der Basis
-       des sortierten Arrays irange_sizes? */
+       des sortierten Arrays irange_sizes?
+       Antwort B: Es wird ausgegeben, wie häufig eine indexrange vorkommt*/
     for (idx = 0; idx < num_values - 1; idx++)
     {
       if (irange_sizes[idx] > irange_sizes[idx+1])
@@ -171,7 +174,9 @@ static void show_irange_sizes(unsigned long *irange_sizes,
 }
 
 /* Frage C: Charakterisieren Sie die Werte im Array, das durch die
-   Funktion generate_array erzeugt wird. */
+   Funktion generate_array erzeugt wird.
+   Antwort C: Das Array beginnt bei 0 und wird durchschnittlich in jeder Zelle 
+   um expected_distance erh"ot. */
 static double *generate_array(size_t length,double expected_distance)
 {
   size_t idx;
@@ -212,7 +217,10 @@ int main(int argc,char *argv[])
   for (idx = 0; idx < options->searches; idx++)
   {
     /* Frage D: Was sind die Wertebereiche der Variablen low und high nach
-                  Initialisierung durch die folgenden Anweisungen? */
+                  Initialisierung durch die folgenden Anweisungen?
+                Antwort: low \in [0, last_element]
+                				 high \in [low, low + 2*expected_interval_width]
+                */
     double low = last_element * drand48(),
            high = low + options->expected_interval_width * 2.0 * drand48();
     Indexrange itv = binsearch_interval(array,options->length,low,high);
