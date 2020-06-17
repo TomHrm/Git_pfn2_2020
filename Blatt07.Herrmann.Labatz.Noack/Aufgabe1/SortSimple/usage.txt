@@ -1,0 +1,5 @@
+Usage: ./sort_simple_mn.x [options] filename
+Sort lines of the named file and write the result to the standard output.
+  -r	sort in reverse order
+  -n	use numerical order
+  -h	show this usage message
