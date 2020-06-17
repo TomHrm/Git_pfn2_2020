@@ -1,0 +1,4 @@
+recursive calls: 2199023255438
+no subset of sum 10930 found
+4573.26user 0.26system 1:16:15elapsed 99%CPU (0avgtext+0avgdata 1948maxresident)k
+0inputs+8outputs (0major+84minor)pagefaults 0swaps

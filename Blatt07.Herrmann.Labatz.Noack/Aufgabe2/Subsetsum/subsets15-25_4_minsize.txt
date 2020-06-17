@@ -1,0 +1,11 @@
+15 = 3 + 5 + 7
+16 = 5 + 11
+no subset of sum 17 found
+18 = 7 + 11
+19 = 3 + 5 + 11
+no subset of sum 20 found
+21 = 3 + 7 + 11
+no subset of sum 22 found
+23 = 5 + 7 + 11
+no subset of sum 24 found
+no subset of sum 25 found

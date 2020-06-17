@@ -98,13 +98,3 @@ unsigned int bitvector2decimal(const char *bitvector)
     }
     return summe;
 }
-/*
-int main(int argc, char *argv[])
-{
-  printf("%d,%s\n",argc, argv[0]);
-  printf("%s\n", decimal2bitvector(256));
-  //printf("%d",bitvector_validate(decimal2bitvector(20)));
-  //printf("%d",bitvector2decimal(decimal2bitvector(20)));
-  return EXIT_SUCCESS;
-}
-*/
