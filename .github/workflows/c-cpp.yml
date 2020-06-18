@@ -25,4 +25,4 @@ jobs:
     - name: executable infos
       run: (file Tests/Checks.x; file Sampling/Program.x; file Extraction/Program.x) | tr "\n" "\n"
     - name: make tests
-      run: (cd Blatt01.Herrmann.Labatz.Noack && cd Aufgabe1 && HelloSimple  && make && make test)
+      run: (cd Blatt01.Herrmann.Labatz.Noack && cd Aufgabe1 && cd HelloSimple  && make && make test)
