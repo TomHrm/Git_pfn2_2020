@@ -24,8 +24,7 @@ static void hanoi_rec_print(int num_of_disks, int from_pole, int to_pole)
 
 static void hanoimoves(int num_of_disks)
 {
-  const int from_pole = 1,
-            to_pole = 2;
+  const int from_pole = 1, to_pole = 2;
 
   hanoi_rec_print(num_of_disks, from_pole, to_pole);
   printf("\n");
@@ -38,7 +37,7 @@ int main(int argc, char *argv[])
   if (argc != 2 || sscanf(argv[1], "%d", &num_of_disks) != 1 ||
       num_of_disks <= 0)
   {
-    fprintf(stderr,"Usage: %s <positive integer>\n", argv[0]);
+    fprintf(stderr, "Usage: %s <positive integer>\n", argv[0]);
     return EXIT_FAILURE;
   }
   hanoimoves(num_of_disks);

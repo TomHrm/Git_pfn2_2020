@@ -5,10 +5,10 @@
 
 typedef double Basetype;
 
-const Basetype *binsearch(const Basetype *array,size_t length,Basetype key);
-const Basetype *binsearch_gt_leq(const Basetype *array,size_t length,
+const Basetype *binsearch(const Basetype *array, size_t length, Basetype key);
+const Basetype *binsearch_gt_leq(const Basetype *array, size_t length,
                                  Basetype key);
-const Basetype *binsearch_sm_geq(const Basetype *array,size_t length,
+const Basetype *binsearch_sm_geq(const Basetype *array, size_t length,
                                  Basetype key);
 
 typedef struct
@@ -16,7 +16,7 @@ typedef struct
   size_t i, j;
 } Indexrange;
 
-Indexrange binsearch_interval(const Basetype *array,size_t length,
-                              Basetype low,Basetype high);
+Indexrange binsearch_interval(const Basetype *array, size_t length,
+                              Basetype low, Basetype high);
 
 #endif

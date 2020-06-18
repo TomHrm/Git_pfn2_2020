@@ -4,7 +4,7 @@
 
 typedef struct PfNFileInfo PfNFileInfo;
 
-PfNFileInfo *pfn_file_info_new(const char *progname,const char *filename);
+PfNFileInfo *pfn_file_info_new(const char *progname, const char *filename);
 
 void pfn_file_info_delete(PfNFileInfo *pfn_file_info);
 

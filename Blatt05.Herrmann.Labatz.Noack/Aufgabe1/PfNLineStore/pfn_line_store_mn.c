@@ -6,31 +6,28 @@
 #include "pfn_file_info.h"
 #include "pfn_line_store.h"
 
-static void usage(const char *progname,bool show_options)
+static void usage(const char *progname, bool show_options)
 {
   const char *optionsmsg =
-    "output number of lines and/or reverse lines of specified files\n"
-    "  -l\toutput number of lines\n"
-    "  -o\tshow lines in reverse order\n"
-    "  -r\tshow characters of each line in reverse order\n"
-    "  -h\tshow this usage message";
+      "output number of lines and/or reverse lines of specified files\n"
+      "  -l\toutput number of lines\n"
+      "  -o\tshow lines in reverse order\n"
+      "  -r\tshow characters of each line in reverse order\n"
+      "  -h\tshow this usage message";
   fprintf(stderr, "Usage: %s [options] ... filename1 [filename2...]\n%s\n",
-          progname,
-          show_options ? optionsmsg : "Use -h for more information.");
+          progname, show_options ? optionsmsg : "Use -h for more information.");
 }
 
-/* FRAGE 1: Wozu dient die Struktur PfNLineStoreOptions? 
-Speichern der Flags die aufgerufen werden. 
+/* FRAGE 1: Wozu dient die Struktur PfNLineStoreOptions?
+Speichern der Flags die aufgerufen werden.
 Und speichern der Dateinamen die "uberpr"uft werden sollen.
 */
 
 typedef struct
 {
-  bool show_num_lines,
-       show_rev_each_line,
-       show_reversed_order;
+  bool show_num_lines, show_rev_each_line, show_reversed_order;
   unsigned long num_of_files;
-  const char * const *filenames;
+  const char *const *filenames;
 } PfNLineStoreOptions;
 
 static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
@@ -47,12 +44,12 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
   /* FRAGE 2: Was passiert in der folgenden while-Schleife? Sie m"ussen
      hier keine technischen Details beschreiben, und es ist nicht notwendig,
      dass Sie das Manual zu getopt konsultieren. Die Antwort ergibt sich aus dem
-     Kontext. 
-     
+     Kontext.
+
      Die while schleife itteriert "uber alle angegebenen Flags und speichert die
      Info je nach dem was es ist, in die Store Struktur.
-     
-     */  
+
+     */
   while ((opt = getopt(argc, argv, "lroh")) != -1)
   {
     switch ((char) opt)
@@ -68,10 +65,11 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
         break;
       case 'h':
         usage(argv[0], true);
-        /* FRAGE 3: Wozu wird die Variable haserr verwendet? 
-        
-        Sie wird bei einer fehlerhaften Eingabe ODER bei der Flag -h gespeichert und gibt die Hilfemeldung aus.
-        Ausserdem wird dann der Speicher wieder freigegeben und das Programm beendet.
+        /* FRAGE 3: Wozu wird die Variable haserr verwendet?
+
+        Sie wird bei einer fehlerhaften Eingabe ODER bei der Flag -h gespeichert
+        und gibt die Hilfemeldung aus. Ausserdem wird dann der Speicher wieder
+        freigegeben und das Programm beendet.
         */
         haserr = true;
         break;
@@ -85,17 +83,18 @@ static PfNLineStoreOptions *pfn_line_store_options_new(int argc,
   if (!haserr)
   {
     /* FRAGE 4: Wo wird die Variable optind deklariert und
-       welche Bedeutung hat sie? 
-       
-       Sie wird in der unistd.h deklariert und stellt den Index des n"achsten Elementes in argv da.
+       welche Bedeutung hat sie?
+
+       Sie wird in der unistd.h deklariert und stellt den Index des n"achsten
+       Elementes in argv da.
        */
     if (optind < argc)
     {
-      options->filenames = (const char * const *) (argv + optind);
+      options->filenames = (const char *const *) (argv + optind);
       options->num_of_files = (unsigned long) (argc - optind);
     } else
     {
-      fprintf(stderr,"%s: Error: filenames expected\n",argv[0]);
+      fprintf(stderr, "%s: Error: filenames expected\n", argv[0]);
       usage(argv[0], false);
       haserr = true;
     }
@@ -120,44 +119,43 @@ static void pfn_line_store_options_delete(PfNLineStoreOptions *options)
    wieder aus.
    FRAGE 5: Wie sieht in der folgenden Funktion die Ausgabe des
    Dateiinhalts in Abh"angigkeit der beiden boolschen-Parameter aus?
-   
+
    Eine direkte Ausgabe findet nicht statt. Es wird lediglich der Zeileninhalt
    je nach Boolean umgedreht.
-   
-   Jede Zeile wird einzeln ungedreht aber der Text ansich nicht. 
+
+   Jede Zeile wird einzeln ungedreht aber der Text ansich nicht.
    Bei reversed_order:
    Der gesammte Text wird umgedreht.
-   
+
    FRAGE 6: Welche Abstraktion wird in der folgenden Funktion verwendet,
    damit man die "au"sere Schleife nur einmal schreiben muss?
-   
+
    Das s"amtliche Argumente von FOR-Schleifen optional sind.
-   
+
 */
 
 static void show_lines_generic(const PfNLineStore *line_store,
-                               bool reversed_order,
-                               bool rev_each_line)
+                               bool reversed_order, bool rev_each_line)
 {
   size_t idx, first_idx, last_idx,
-         num_lines = pfn_line_store_number(line_store);
+      num_lines = pfn_line_store_number(line_store);
   int step;
   const char sep = pfn_line_store_sep(line_store);
 
   if (reversed_order)
   {
-    first_idx = num_lines-1;
+    first_idx = num_lines - 1;
     last_idx = 0;
     step = -1;
   } else
   {
     first_idx = 0;
-    last_idx = num_lines-1;
+    last_idx = num_lines - 1;
     step = 1;
   }
   for (idx = first_idx; /* nocheck */; idx += step)
   {
-    const char *line_ptr = pfn_line_store_access(line_store,idx);
+    const char *line_ptr = pfn_line_store_access(line_store, idx);
     const size_t line_length = strlen(line_ptr);
     if (rev_each_line)
     {
@@ -170,7 +168,7 @@ static void show_lines_generic(const PfNLineStore *line_store,
     {
       /* write the memory of (line_length * sizeof *line_ptr) bytes referred
          to by line_ptr to stdout */
-      fwrite(line_ptr,sizeof *line_ptr,line_length,stdout);
+      fwrite(line_ptr, sizeof *line_ptr, line_length, stdout);
     }
     putchar(sep);
     if (idx == last_idx)
@@ -180,12 +178,12 @@ static void show_lines_generic(const PfNLineStore *line_store,
   }
 }
 
-int main(int argc,char *argv[])
+int main(int argc, char *argv[])
 {
   unsigned long idx;
   size_t total_lines = 0;
-  PfNLineStoreOptions *options
-    = pfn_line_store_options_new(argc,(char *const *) argv);
+  PfNLineStoreOptions *options =
+      pfn_line_store_options_new(argc, (char *const *) argv);
   bool haserr = false;
   if (options == NULL)
   {
@@ -193,8 +191,8 @@ int main(int argc,char *argv[])
   }
   for (idx = 0; idx < options->num_of_files; idx++)
   {
-    PfNFileInfo *file_info
-      = pfn_file_info_new(argv[0],options->filenames[idx]);
+    PfNFileInfo *file_info =
+        pfn_file_info_new(argv[0], options->filenames[idx]);
     size_t file_size, num_lines = 0;
     if (file_info == NULL)
     {
@@ -206,8 +204,8 @@ int main(int argc,char *argv[])
       PfNLineStore *line_store;
       void *file_contents = pfn_file_info_contents(file_info);
 
-      line_store = pfn_line_store_new((unsigned char *) file_contents,
-                                      file_size,'\n');
+      line_store =
+          pfn_line_store_new((unsigned char *) file_contents, file_size, '\n');
       if (line_store == NULL)
       {
         haserr = true;
@@ -217,8 +215,7 @@ int main(int argc,char *argv[])
         total_lines += num_lines;
         if (options->show_reversed_order || options->show_rev_each_line)
         {
-          show_lines_generic(line_store,
-                             options->show_reversed_order,
+          show_lines_generic(line_store, options->show_reversed_order,
                              options->show_rev_each_line);
         }
       }
@@ -226,13 +223,13 @@ int main(int argc,char *argv[])
     }
     if (!haserr && options->show_num_lines)
     {
-      printf("%8lu %s\n",num_lines,options->filenames[idx]);
+      printf("%8lu %s\n", num_lines, options->filenames[idx]);
     }
     pfn_file_info_delete(file_info);
   }
   if (!haserr && options->show_num_lines)
   {
-    printf("%8lu total\n",total_lines);
+    printf("%8lu total\n", total_lines);
   }
   pfn_line_store_options_delete(options);
   return EXIT_SUCCESS;
