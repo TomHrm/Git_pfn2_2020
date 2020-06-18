@@ -1,0 +1,27 @@
+Wir sortieren Fließkommazahlen zwischen -500000 und 500000.
+
+Sort läuft um einiges schneller durch, weil es das konvertieren von den strings zu zahlen optimierten bzw schneller löst, zumindest kann sort mehrere cpu Kerne nutzen.
+
+Lexikographische Sortierung hat schonmal die mehr Daten weshalb es langsamer ist.
+
+./randnums.py -f 500000 > /var/folders/q4/cwnltt6n5jg0hm6_gb83vvvh0000gn/T/tmp.ONtV2Cvq
+time ./sort_simple_mn.x -n /var/folders/q4/cwnltt6n5jg0hm6_gb83vvvh0000gn/T/tmp.ONtV2Cvq > /dev/null
+
+real	0m0.908s
+user	0m0.894s
+sys	0m0.009s
+time sort -n /var/folders/q4/cwnltt6n5jg0hm6_gb83vvvh0000gn/T/tmp.ONtV2Cvq > /dev/null
+
+real	0m1.026s
+user	0m0.988s
+sys	0m0.032s
+time ./sort_simple_mn.x /var/folders/q4/cwnltt6n5jg0hm6_gb83vvvh0000gn/T/tmp.ONtV2Cvq > /dev/null
+
+real	0m0.269s
+user	0m0.257s
+sys	0m0.009s
+time sort /var/folders/q4/cwnltt6n5jg0hm6_gb83vvvh0000gn/T/tmp.ONtV2Cvq > /dev/null
+
+real	0m0.719s
+user	0m0.681s
+sys	0m0.033s
