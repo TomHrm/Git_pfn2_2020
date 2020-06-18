@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
 #include <ctype.h>
 #include "pfn_line_store.h"
 #include "sort_simple.h"
@@ -20,7 +19,6 @@ bool line_is_numeric(PfNLine line)
   {
     if(!isdigit(line[i]) && line[i] != '.')
     {
-      
       return false;
     }
   }
@@ -32,13 +30,11 @@ int num_cmp(const void* line1, const void* line2)
   const PfNLine *l1 = (const PfNLine *) line1;
   const PfNLine *l2 = (const PfNLine *) line2;
   
-  
   bool num1 = line_is_numeric(*l1);
   bool num2 = line_is_numeric(*l2);
   
   if(!(num1 || num2))
   {
-    //printf("lex_cmp %s, %s result: %d\n", *l1, *l2, lex_cmp(line1, line2));
     return lex_cmp(line1, line2);
   }
   double d1 = 0.0;
@@ -60,8 +56,6 @@ int num_cmp(const void* line1, const void* line2)
     }
     d2 = atof(*l2);
   }
-  
-  //printf("%f %f, result: %d\n", d1, d2, (d1 >= d2? -1 : 1));
   return d1 >= d2? -1 : 1;
 }
 
@@ -75,7 +69,8 @@ int num_reverse_cmp(const void* line1, const void* line2)
   return -num_cmp(line1, line2);
 }
 
-void sort_simple(PfNLineStore * line_store, bool numerical_order, bool reverse_order)
+void sort_simple(PfNLineStore * line_store, bool numerical_order,
+                                            bool reverse_order)
 {
   if(numerical_order)
   {
@@ -95,5 +90,4 @@ void sort_simple(PfNLineStore * line_store, bool numerical_order, bool reverse_o
       pfn_line_store_sort(line_store, lex_reverse_cmp);
     }
   }
-  
 }

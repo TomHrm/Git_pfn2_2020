@@ -95,20 +95,15 @@ char pfn_line_store_sep(const PfNLineStore *pfn_line_store)
 void pfn_line_store_show(const PfNLineStore *pfn_line_store)
 {
   size_t idx, num_lines = pfn_line_store_number(pfn_line_store);
-debug(" ");
   for (idx = 0; idx < num_lines; idx++)
   {
     PfNLine line = pfn_line_store_access(pfn_line_store,idx);
-	
     printf("%s%c",line,pfn_line_store->separator);
   }
-debug(" ");
 }
 
 void pfn_line_store_sort(PfNLineStore *pfn_line_store,CompareFunc compar)
 {
-
   qsort(pfn_line_store -> lines, pfn_line_store_number(pfn_line_store), 
         sizeof (*pfn_line_store -> lines), compar);
-        //sizeof char alternative?
 }

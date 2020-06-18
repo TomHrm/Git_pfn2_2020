@@ -5,32 +5,28 @@
 #include "pfn_file_info.h"
 #include "sort_simple.h"
 
-/* Hier den code der Funktionen
-   usage
-   options_new
-   options_delete
-   und die Deklaration des Typs Options einf"ugen. */
 typedef struct
 {
   bool numerical_order;
   bool reverse_order;
   unsigned long num_of_files;
   const char * const *filenames;
-}Options;
+} Options;
 
-void usage(bool showOptions, char *filename)
+void usage(bool showOptions, char *progname)
 {
-  fprintf(stderr, "Usage: %s [options] filename\n", filename);
+  fprintf(stderr, "Usage: %s [options] filename\n", progname);
   if(showOptions)
   {
-    fprintf(stderr, "Sort lines of the named file and write the result to the standard output.\n"
-    "-r	sort in reverse order\n"
-    "-n	use numerical order\n"
-    "-h	show this usage message\n"); 
+    fprintf(stderr, "Sort lines of the named file and write the "
+    "result to the standard output.\n"
+    "-r\tsort in reverse order\n"
+    "-n\tuse numerical order\n"
+    "-h\tshow this usage message\n"); 
   } else 
-    {
-      fprintf(stderr,"Use -h for more information.\n");
-    }
+  {
+    fprintf(stderr,"Use -h for more information.\n");
+  }
 }
 
 Options *options_new(int argc, char* const* argv)
@@ -64,15 +60,14 @@ Options *options_new(int argc, char* const* argv)
    
   if (!haserr)
   {
-   
     if (optind < argc)
     {
-      options->filenames = (const char * const *) (argv + optind);
-      options->num_of_files = (unsigned long) (argc - optind);
+      options -> filenames = (const char * const *) (argv + optind);
+      options -> num_of_files = (unsigned long) (argc - optind);
     } else
     {
       fprintf(stderr,"%s: Error: filenames expected\n",argv[0]);
-      usage(argv[0], false);
+      usage(false,argv[0]);
       haserr = true;
     }
   }
@@ -97,12 +92,10 @@ int main(int argc, char *argv[])
   Options *options = options_new(argc, (char *const *) argv);
   unsigned long idx;
   bool haserr = false;
-	debug(" ");
   if (options == NULL)
   {
     return EXIT_FAILURE;
   }
-	debug(" ");
   for (idx = 0; idx < options->num_of_files; idx++)
   {
     size_t file_size;
@@ -118,25 +111,19 @@ int main(int argc, char *argv[])
     {
       PfNLineStore *line_store;
       void *file_contents = pfn_file_info_contents(file_info);
-debug(" ");
       line_store =
           pfn_line_store_new((unsigned char *) file_contents, file_size, '\n');
-debug(" ");
       if (line_store == NULL)
       {
         haserr = true;
       } else
       {
-debug(" ");
         sort_simple(line_store, options->numerical_order,
                     options->reverse_order);
-debug(" ");
         pfn_line_store_show(line_store);
-debug(" ");
         pfn_line_store_delete(line_store);
       }
     }
-debug(" ");
     pfn_file_info_delete(file_info);
   }
   options_delete(options);
