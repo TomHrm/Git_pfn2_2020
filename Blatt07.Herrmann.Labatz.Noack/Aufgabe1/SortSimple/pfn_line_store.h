@@ -1,6 +1,8 @@
 #ifndef PFN_LINE_STORE_H
 #define PFN_LINE_STORE_H
 
+#define debug(s) //printf("Debug: filename %s, line: %d, msg: %s\n", __FILE__, __LINE__, s)
+
 typedef struct PfNLineStore PfNLineStore;
 
 PfNLineStore *pfn_line_store_new(unsigned char *file_contents,
