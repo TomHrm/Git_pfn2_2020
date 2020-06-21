@@ -40,15 +40,15 @@ echo "----------------------------------------------------------------------"
 # Um alle Tests einmal aufzurufen muss der folgende Codeabschnitt            #
 # ein- bzw wieder auskommentiert werden:                                     #
 #                                                                            #
-for file in ./*/*/*/Makefile; do                                            #
-	fdir=$(dirname "$file")                                                    #
-	cd $fdir                                                                   #
-	echo "\n\n$fdir:"                                                          #
-	make                                                                       #
-  make test                                                                 #
-  make clean                                                                #
-  echo "\n"                                                                 #
-  cd ${pfad}                                                                #
-done                                                                        #
-echo "---------------------------------------------------------------------"#
+#for file in ./*/*/*/Makefile; do                                            #
+#	fdir=$(dirname "$file")                                                    #
+#	cd $fdir                                                                   #
+#	echo "\n\n$fdir:"                                                          #
+#	make                                                                       #
+#  make test                                                                 #
+#  make clean                                                                #
+#  echo "\n"                                                                 #
+#  cd ${pfad}                                                                #
+#done                                                                        #
+#echo "---------------------------------------------------------------------"#
 ##############################################################################
