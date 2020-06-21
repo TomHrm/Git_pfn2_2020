@@ -35,7 +35,7 @@ test_m_no_sol:${MAIN}
 	@echo "Congratulations. $@ passed"
 
 test_difficult:${MAIN}
-	@./${MAIN} -f numbers.txt -r 10930 10930 | diff - no_solution.txt
+	@./${MAIN} -f numbers40.txt -r 10930 10930 | diff - no_solution.txt
 	@echo "Congratulations. $@ passed"
 
 %.o: %.c
