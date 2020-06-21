@@ -10,7 +10,7 @@
    dann true zur"uck, wenn die Bitvektoren die gleichen Zahlen
    repr"asentieren.
    FRAGE 1: Warum kann man hierf"ur nicht die C-Funktion strcmp verwenden?
-   
+
    ANTWORT:
    Die strcmp Funktion vergleicht zwei Strings und beachtet Leerzeichen.
    Bitvektoren können Leeerzeichen enthalten oder auch nicht.
@@ -18,7 +18,7 @@
    ausgewertet werden.
 */
 
-static bool bitvector_equal(const char *bv0,const char *bv1)
+static bool bitvector_equal(const char *bv0, const char *bv1)
 {
   unsigned long idx0, idx1;
 
@@ -38,8 +38,8 @@ static bool bitvector_equal(const char *bv0,const char *bv1)
     {
       if (bv0[idx0] != bv1[idx1])
       {
-        fprintf(stderr,"bv0[%lu] = %c != %c = bv1[%lu]\n",
-                        idx0,bv0[idx0],bv1[idx1],idx1);
+        fprintf(stderr, "bv0[%lu] = %c != %c = bv1[%lu]\n", idx0, bv0[idx0],
+                bv1[idx1], idx1);
         return false;
       }
       idx0++;
@@ -52,10 +52,10 @@ static bool bitvector_equal(const char *bv0,const char *bv1)
 /* Diese Funktion verifiziert, dass die Konversion einer Dezimalzahl n
    in den Bitvektor und die Konversion des Bitvektors in eine
    Dezimalzahl die urspr"ungliche Dezimalzahl n liefert.
-   
+
    FRAGE 2: Warum ist es notwendig, an drei Stellen die Funktion free
-   aufzurufen? 
-   
+   aufzurufen?
+
    ANTWORT: Es wird vor jeden Return, also Beenden der Funktion,
    aufgerufen um den Speicher wieder freizugeben.
    */
@@ -73,8 +73,8 @@ static int verify_conversion(unsigned int decimal)
   converted_decimal = bitvector2decimal(bitvector);
   if (decimal != converted_decimal)
   {
-    fprintf(stderr,"bitvector = %s, decimal = %u != %u = value\n",
-                    bitvector,decimal,converted_decimal);
+    fprintf(stderr, "bitvector = %s, decimal = %u != %u = value\n", bitvector,
+            decimal, converted_decimal);
     free(bitvector);
     return -1;
   }
@@ -82,7 +82,7 @@ static int verify_conversion(unsigned int decimal)
   return 0;
 }
 
-int main(int argc,char *argv[0])
+int main(int argc, char *argv[0])
 {
   const int precision = 1 + (int) log10((double) UINT_MAX);
 
@@ -92,11 +92,11 @@ int main(int argc,char *argv[0])
     unsigned int decimal, display;
 
     /* FRAGE 3: F"ur welche Werte werden in der folgenden for-Schleife
-       Tests durchf"uhrt? 
+       Tests durchf"uhrt?
 
        ANTWORT: In der Schleife werden alle 2er Potenzen
        bis 16777215 getestet.
-       
+
     */
     for (decimal = 0, display = 1; decimal < 16777216; decimal++)
     {
@@ -104,22 +104,22 @@ int main(int argc,char *argv[0])
       {
         return EXIT_FAILURE;
       }
-      /* FRAGE 4: Wozu dient diese if-Anweisung? 
-      
+      /* FRAGE 4: Wozu dient diese if-Anweisung?
+
       ANTWORT: Um nur die bedingten Anweisungen durchzuführen wenn 'decimal'
       eine 2er Potenz ist.
       */
       if (display == decimal)
       {
         char *this_bitvector = decimal2bitvector(decimal);
-        printf("%*u = %s\n",precision,decimal,this_bitvector);
+        printf("%*u = %s\n", precision, decimal, this_bitvector);
         free(this_bitvector);
         display *= 2;
       }
     }
     /* FRAGE 5: Aus welchem Wertebereich stammen die Zahlen, f"ur die
-       in der folgenden Schleife Tests durchgef"uhrt werden? 
-       
+       in der folgenden Schleife Tests durchgef"uhrt werden?
+
     ANTWORT: Die Zahl muss aus dem Wertebereich zwischen
     1 und 2^32-1 (UINT_MAX) kommen.
     */
@@ -136,8 +136,8 @@ int main(int argc,char *argv[0])
   {
     int idx;
     /* FRAGE 6: F"ur welche Strings werden in der folgenden Zeile
-       Tests durchgef"uhrt? 
-       
+       Tests durchgef"uhrt?
+
        ANTWORT: Für alle Parameter die bei Start mit übergeben werden,
        ausser argv[0].
        */
@@ -152,14 +152,16 @@ int main(int argc,char *argv[0])
       }
       decimal = bitvector2decimal(argv[idx]);
       this_bitvector = decimal2bitvector(decimal);
-      if (!bitvector_equal(argv[idx],this_bitvector))
+      if (!bitvector_equal(argv[idx], this_bitvector))
       {
-        fprintf(stderr,"bitvectors %s and %s do not represent the same decimal "
-                       "value %u\n",argv[idx],this_bitvector,decimal);
+        fprintf(stderr,
+                "bitvectors %s and %s do not represent the same decimal "
+                "value %u\n",
+                argv[idx], this_bitvector, decimal);
         free(this_bitvector);
         return EXIT_FAILURE;
       }
-      printf("%*u = %s\n",precision,decimal,this_bitvector);
+      printf("%*u = %s\n", precision, decimal, this_bitvector);
       free(this_bitvector);
     }
   }

@@ -10,10 +10,9 @@ typedef struct
 
 } DefinedValues;
 
-
 void print_array(const bool *b, unsigned long length)
 {
-  for(int i = 0; i < length; i++)
+  for (int i = 0; i < length; i++)
   {
     printf("%d: %d\n", i, b[i]);
   }
@@ -21,100 +20,85 @@ void print_array(const bool *b, unsigned long length)
 
 bool hs(const unsigned long *a, unsigned long i, unsigned long t, bool *mark)
 {
-  if(t==0)
+  if (t == 0)
   {
     return true;
-  }
-  else if(i==0)
+  } else if (i == 0)
   {
     return false;
-  }
-  else if(t >= a[i-1] && hs(a, i-1, t-a[i-1], mark))
+  } else if (t >= a[i - 1] && hs(a, i - 1, t - a[i - 1], mark))
   {
-    //printf("mark pre:\n");
-    //print_array(mark, (unsigned long)i);
-    //printf("t: %ld, i: %ld, a[i-1]: %ld, hs(a, i-1, t-a[i-1], mark): %d\n", t, i, a[i-1], hs(a, i-1, t-a[i-1], mark));
-    mark[i-1]=true;
+    mark[i - 1] = true;
     return true;
-  }
-  else
+  } else
   {
-    //printf("blub\n");
-    mark[i-1]=false;
-    return hs(a, i-1, t, mark);
+    mark[i - 1] = false;
+    return hs(a, i - 1, t, mark);
   }
-  
 }
 
 bool *subsetsum(const unsigned long *arr, unsigned long r, unsigned long s)
 {
-  //Ergebnis-Array
   bool *mark = calloc(r, sizeof *mark);
-  
-  if (!hs(arr,r,s, mark))
+
+  if (!hs(arr, r, s, mark))
   {
     free(mark);
     return NULL;
-  }
-  else
+  } else
   {
-    //print_array(mark,r);
     return mark;
   }
 }
 
-
-bool hs_mat(const unsigned long *a, unsigned long i, unsigned long t, DefinedValues **val_mat, bool *mark)
+bool hs_mat(const unsigned long *a, unsigned long i, unsigned long t,
+            DefinedValues **val_mat, bool *mark)
 {
-  if(val_mat[i][t].defined)
+  if (val_mat[i][t].defined)
   {
     return val_mat[i][t].has_sol;
   }
-  if(t==0)
+  if (t == 0)
   {
     return true;
-  }
-  else if(i==0)
+  } else if (i == 0)
   {
     return false;
-  }
-  else if(t >= a[i-1] && hs_mat(a, i-1, t-a[i-1], val_mat, mark))
-  { val_mat[i][t].defined = true;
+  } else if (t >= a[i - 1] && hs_mat(a, i - 1, t - a[i - 1], val_mat, mark))
+  {
+    val_mat[i][t].defined = true;
     val_mat[i][t].has_sol = true;
-    mark[i-1] = true;
+    mark[i - 1] = true;
 
     return true;
-  }
-  else
+  } else
   {
     val_mat[i][t].defined = true;
     val_mat[i][t].has_sol = false;
-    return hs_mat(a, i-1, t, val_mat, mark);
+    return hs_mat(a, i - 1, t, val_mat, mark);
   }
 }
 
 bool *subsetsum_memo(const unsigned long *arr, unsigned long r, unsigned long s)
 {
   bool *mark = calloc(r, sizeof *mark);
-  DefinedValues ** val_mat;
-  array2dim_malloc(val_mat, DefinedValues, r+1, s+1);
-  for(int i = 0; i <= r; i++)
+  DefinedValues **val_mat;
+  array2dim_malloc(val_mat, DefinedValues, r + 1, s + 1);
+  for (int i = 0; i <= r; i++)
   {
-    for(int j = 0; j <= s; j++)
+    for (int j = 0; j <= s; j++)
     {
       val_mat[i][j].defined = false;
       val_mat[i][j].has_sol = false;
     }
   }
 
-  if (!hs_mat(arr,r,s, val_mat, mark))
+  if (!hs_mat(arr, r, s, val_mat, mark))
   {
     array2dim_delete(val_mat);
     return NULL;
-  }
-  else
+  } else
   {
     return mark;
   }
 }
-

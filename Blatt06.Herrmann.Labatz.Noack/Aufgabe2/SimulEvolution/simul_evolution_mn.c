@@ -9,8 +9,8 @@
 #include "simul_evolution.h"
 
 static void usage(const char *progname, bool show_options,
-                  size_t default_num_individuals,
-                  double default_prob,size_t default_generations)
+                  size_t default_num_individuals, double default_prob,
+                  size_t default_generations)
 {
   fprintf(stderr,
           "Usage: %s [options]\n"
@@ -19,26 +19,27 @@ static void usage(const char *progname, bool show_options,
           progname);
   if (show_options)
   {
-    fprintf(stderr,
-      "  -m <int>\tinitial number of occurrences of individuals of type 0\n"
-      "          \t(default: %lu)\n"
-      "  -n <int>\tinitial number of occurrences of individuals of type 1\n"
-      "          \t(default: %lu)\n"
-      "  -p <double>\tprobability that an individual of type 0 divides\n"
-      "             \t(default: %.1f)\n"
-      "  -q <double>\tprobability that an individual of type 1 divides\n"
-      "             \t(default: %.2f)\n"
-      "  -g <int>\tmaximum number of simulated generations (default: %lu)\n"
-      "  -l <filename>\tspecify name of log file to store simulation state\n"
-      "               \t(default: undefined)\n"
-      "  -s <int>\tseed for the random number generator\n"
-      "              \t(default: return value of time(NULL))\n"
-      "  -h          \tshow this usage message\n",
-      default_num_individuals,default_num_individuals,
-      default_prob,default_prob,default_generations);
+    fprintf(
+        stderr,
+        "  -m <int>\tinitial number of occurrences of individuals of type 0\n"
+        "          \t(default: %lu)\n"
+        "  -n <int>\tinitial number of occurrences of individuals of type 1\n"
+        "          \t(default: %lu)\n"
+        "  -p <double>\tprobability that an individual of type 0 divides\n"
+        "             \t(default: %.1f)\n"
+        "  -q <double>\tprobability that an individual of type 1 divides\n"
+        "             \t(default: %.2f)\n"
+        "  -g <int>\tmaximum number of simulated generations (default: %lu)\n"
+        "  -l <filename>\tspecify name of log file to store simulation state\n"
+        "               \t(default: undefined)\n"
+        "  -s <int>\tseed for the random number generator\n"
+        "              \t(default: return value of time(NULL))\n"
+        "  -h          \tshow this usage message\n",
+        default_num_individuals, default_num_individuals, default_prob,
+        default_prob, default_generations);
   } else
   {
-    fprintf(stderr,"Use -h for more information.\n");
+    fprintf(stderr, "Use -h for more information.\n");
   }
 }
 
@@ -59,8 +60,8 @@ static Options *options_new(int argc, char *const *argv)
   Options *options = malloc(sizeof *options);
 
   assert(options != NULL);
-  options->num_indivduals[0] = options->num_indivduals[1]
-                             = default_num_individuals;
+  options->num_indivduals[0] = options->num_indivduals[1] =
+      default_num_individuals;
   options->prob_divide[0] = options->prob_divide[1] = default_prob;
   options->seed = 0;
   options->generations = default_generations;
@@ -74,19 +75,20 @@ static Options *options_new(int argc, char *const *argv)
     {
       case 'p':
       case 'q':
-        if (optind > argc-1)
+        if (optind > argc - 1)
         {
           fprintf(stderr, "%s: Error: missing parameter to option -%c\n",
-                   argv[0],(char) opt);
+                  argv[0], (char) opt);
           haserr = true;
           break;
         }
-        if (sscanf(argv[optind],"%lf",&read_double) != 1 ||
+        if (sscanf(argv[optind], "%lf", &read_double) != 1 ||
             read_double < 0.0 || read_double > 1.0)
         {
-          fprintf(stderr, "%s: Error: argument to option -%c must be floating "
-                          "point value in the range from 0.0 to 1.0\n",
-                   argv[0],(char) opt);
+          fprintf(stderr,
+                  "%s: Error: argument to option -%c must be floating "
+                  "point value in the range from 0.0 to 1.0\n",
+                  argv[0], (char) opt);
           haserr = true;
           break;
         }
@@ -97,17 +99,19 @@ static Options *options_new(int argc, char *const *argv)
       case 's':
       case 'm':
       case 'n':
-        if (optind > argc-1)
+        if (optind > argc - 1)
         {
           fprintf(stderr, "%s: Error: missing parameter to option -%c\n",
-                   argv[0],(char) opt);
+                  argv[0], (char) opt);
           haserr = true;
           break;
         }
-        if (sscanf(argv[optind],"%ld",&read_long) != 1 || read_long < 1)
+        if (sscanf(argv[optind], "%ld", &read_long) != 1 || read_long < 1)
         {
-          fprintf(stderr, "%s: Error: argument to option -%c must be "
-                          "positive integer\n",argv[0],(char) opt);
+          fprintf(stderr,
+                  "%s: Error: argument to option -%c must be "
+                  "positive integer\n",
+                  argv[0], (char) opt);
           haserr = true;
           break;
         }
@@ -121,17 +125,17 @@ static Options *options_new(int argc, char *const *argv)
             options->seed = read_long;
           } else
           {
-            assert (opt == 'm' || opt == 'n');
+            assert(opt == 'm' || opt == 'n');
             options->num_indivduals[opt == 'm' ? 0 : 1] = (size_t) read_long;
           }
         }
         optind++;
         break;
       case 'l':
-        if (optind > argc-1)
+        if (optind > argc - 1)
         {
           fprintf(stderr, "%s: Error: missing parameter to option -%c\n",
-                   argv[0],(char) opt);
+                  argv[0], (char) opt);
           haserr = true;
           break;
         }
@@ -139,13 +143,13 @@ static Options *options_new(int argc, char *const *argv)
         optind++;
         break;
       case 'h':
-        usage(argv[0], true, default_num_individuals,default_prob,
+        usage(argv[0], true, default_num_individuals, default_prob,
               default_generations);
         haserr = true;
         break;
       default:
         assert((char) opt == '?');
-        usage(argv[0], false, default_num_individuals,default_prob,
+        usage(argv[0], false, default_num_individuals, default_prob,
               default_generations);
         haserr = true;
         break;
@@ -155,13 +159,13 @@ static Options *options_new(int argc, char *const *argv)
   {
     if (optind < argc)
     {
-      fprintf(stderr, "%s: superfluous argument %s\n", argv[0],argv[optind]);
-      usage(argv[0], false, default_num_individuals,default_prob,
+      fprintf(stderr, "%s: superfluous argument %s\n", argv[0], argv[optind]);
+      usage(argv[0], false, default_num_individuals, default_prob,
             default_generations);
       haserr = true;
     } else
     {
-      assert (optind == argc);
+      assert(optind == argc);
     }
   }
   if (haserr)
@@ -184,7 +188,7 @@ int main(int argc, char *argv[])
 {
   FILE *logfp = NULL;
   bool haserr = false;
-  Options *options = options_new(argc,(char *const *) argv);
+  Options *options = options_new(argc, (char *const *) argv);
 
   if (options == NULL)
   {
@@ -192,10 +196,10 @@ int main(int argc, char *argv[])
   }
   if (options->logfilename != NULL)
   {
-    logfp = fopen(options->logfilename,"w");
+    logfp = fopen(options->logfilename, "w");
     if (logfp == NULL)
     {
-      fprintf(stderr,"%s: cannot open logfile %s\n",argv[0],
+      fprintf(stderr, "%s: cannot open logfile %s\n", argv[0],
               options->logfilename);
       haserr = true;
     }
@@ -211,10 +215,10 @@ int main(int argc, char *argv[])
     {
       lseed = options->seed;
     }
-    fprintf(stderr,"# seed %ld\n",lseed);
+    fprintf(stderr, "# seed %ld\n", lseed);
     srand48(lseed);
-    simulation_run(options->num_indivduals,options->prob_divide,
-                   options->generations,logfp);
+    simulation_run(options->num_indivduals, options->prob_divide,
+                   options->generations, logfp);
   }
   if (logfp != NULL)
   {

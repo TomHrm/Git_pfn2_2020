@@ -63,7 +63,7 @@ static Options *options_new(int argc, char *const *argv)
       case 'f':
         if (optind > argc - 1)
         {
-          fprintf(stderr,"%s: missing arguments to option -f\n",argv[0]);
+          fprintf(stderr, "%s: missing arguments to option -f\n", argv[0]);
           usage(argv[0], false);
           haserr = true;
         } else
@@ -74,20 +74,21 @@ static Options *options_new(int argc, char *const *argv)
       case 'r':
         if (optind + 1 > argc - 1)
         {
-          fprintf(stderr,"%s: missing arguments to option -r\n",argv[0]);
+          fprintf(stderr, "%s: missing arguments to option -r\n", argv[0]);
           usage(argv[0], false);
           haserr = true;
         } else
         {
           long read_lower, read_upper;
 
-          if (sscanf(argv[optind],"%ld",&read_lower) != 1 || read_lower < 1 ||
-              sscanf(argv[optind+1],"%ld",&read_upper) != 1 ||
+          if (sscanf(argv[optind], "%ld", &read_lower) != 1 || read_lower < 1 ||
+              sscanf(argv[optind + 1], "%ld", &read_upper) != 1 ||
               read_lower > read_upper)
           {
-            fprintf(stderr,"%s: two arguments to -r must be two integers,\n"
-                           "with the first smaller or equal to the second\n",
-                            argv[0]);
+            fprintf(stderr,
+                    "%s: two arguments to -r must be two integers,\n"
+                    "with the first smaller or equal to the second\n",
+                    argv[0]);
             usage(argv[0], false);
             haserr = true;
           } else
@@ -110,13 +111,13 @@ static Options *options_new(int argc, char *const *argv)
   }
   if (!haserr && optind != argc)
   {
-    fprintf(stderr, "%s: Error: superfluous argument\n",argv[0]);
+    fprintf(stderr, "%s: Error: superfluous argument\n", argv[0]);
     usage(argv[0], false);
     haserr = true;
   }
   if (!haserr && options->filename == NULL)
   {
-    fprintf(stderr, "%s: Error: option -f is mandatory\n",argv[0]);
+    fprintf(stderr, "%s: Error: option -f is mandatory\n", argv[0]);
     usage(argv[0], false);
     haserr = true;
   }
@@ -136,7 +137,7 @@ static void options_delete(Options *options)
   }
 }
 
-static unsigned long show_subset(const unsigned long *arr,bool *mark,
+static unsigned long show_subset(const unsigned long *arr, bool *mark,
                                  size_t setsize)
 {
   unsigned long idx, sum = 0;
@@ -144,14 +145,14 @@ static unsigned long show_subset(const unsigned long *arr,bool *mark,
 
   for (idx = 0; idx < setsize; idx++)
   {
-     sum += mark[idx] ? arr[idx] : 0;
+    sum += mark[idx] ? arr[idx] : 0;
   }
-  printf("%lu = ",sum);
+  printf("%lu = ", sum);
   for (idx = 0; idx < setsize; idx++)
   {
     if (mark[idx])
     {
-      printf("%s%lu",first ? "" : " + ",arr[idx]);
+      printf("%s%lu", first ? "" : " + ", arr[idx]);
       first = false;
     }
   }
@@ -184,7 +185,7 @@ int main(int argc, char *argv[])
 
     for (idx = 0; idx < setsize; idx++)
     {
-      assert(arr[idx] >= 0 && (idx == 0 || arr[idx-1] <= arr[idx]));
+      assert(arr[idx] >= 0 && (idx == 0 || arr[idx - 1] <= arr[idx]));
     }
     for (number = options->lower_bound; number <= options->upper_bound;
          number++)
@@ -192,13 +193,13 @@ int main(int argc, char *argv[])
 #ifdef WITH_DP_BASED_METHOD
       if (options->use_dp_based_method)
       {
-        mark = subsetsum_dp((const unsigned long *) arr,setsize,number);
+        mark = subsetsum_dp((const unsigned long *) arr, setsize, number);
       } else
       {
 #endif
         if (options->use_memo_based_method)
         {
-          mark = subsetsum_memo((const unsigned long *) arr,setsize,number);
+          mark = subsetsum_memo((const unsigned long *) arr, setsize, number);
         } else
         {
           mark = subsetsum((const unsigned long *) arr, setsize, number);
@@ -208,13 +209,13 @@ int main(int argc, char *argv[])
 #endif
       if (mark != NULL)
       {
-        const unsigned long this_sum = show_subset((const unsigned long *) arr,
-                                                   mark,setsize);
+        const unsigned long this_sum =
+            show_subset((const unsigned long *) arr, mark, setsize);
         assert(this_sum == number);
         free(mark);
       } else
       {
-        printf("no subset of sum %lu found\n",number);
+        printf("no subset of sum %lu found\n", number);
       }
     }
     list_of_numbers_delete(list_of_numbers);

@@ -10,44 +10,45 @@ typedef struct
   bool numerical_order;
   bool reverse_order;
   unsigned long num_of_files;
-  const char * const *filenames;
+  const char *const *filenames;
 } Options;
 
 void usage(bool showOptions, char *progname)
 {
   fprintf(stderr, "Usage: %s [options] filename\n", progname);
-  if(showOptions)
+  if (showOptions)
   {
-    fprintf(stderr, "Sort lines of the named file and write the "
-    "result to the standard output.\n"
-    "-r\tsort in reverse order\n"
-    "-n\tuse numerical order\n"
-    "-h\tshow this usage message\n"); 
-  } else 
+    fprintf(stderr,
+            "Sort lines of the named file and write the "
+            "result to the standard output.\n"
+            "-r\tsort in reverse order\n"
+            "-n\tuse numerical order\n"
+            "-h\tshow this usage message\n");
+  } else
   {
-    fprintf(stderr,"Use -h for more information.\n");
+    fprintf(stderr, "Use -h for more information.\n");
   }
 }
 
-Options *options_new(int argc, char* const* argv)
-{ 
+Options *options_new(int argc, char *const *argv)
+{
   bool haserr = false;
   int opt;
   Options *options = malloc(sizeof *options);
   assert(options != NULL);
-  options -> reverse_order = false;
-  options -> numerical_order = false;
+  options->reverse_order = false;
+  options->numerical_order = false;
   while ((opt = getopt(argc, argv, "rnh")) != -1)
   {
-    switch((char)opt)
+    switch ((char) opt)
     {
-      case'r':
+      case 'r':
         options->reverse_order = true;
         break;
       case 'n':
-        options -> numerical_order = true;
+        options->numerical_order = true;
         break;
-      case 'h' :
+      case 'h':
         usage(true, argv[0]);
         break;
       default:
@@ -55,19 +56,19 @@ Options *options_new(int argc, char* const* argv)
         usage(false, argv[0]);
         haserr = true;
         break;
-     }
-   }
-   
+    }
+  }
+
   if (!haserr)
   {
     if (optind < argc)
     {
-      options -> filenames = (const char * const *) (argv + optind);
-      options -> num_of_files = (unsigned long) (argc - optind);
+      options->filenames = (const char *const *) (argv + optind);
+      options->num_of_files = (unsigned long) (argc - optind);
     } else
     {
-      fprintf(stderr,"%s: Error: filenames expected\n",argv[0]);
-      usage(false,argv[0]);
+      fprintf(stderr, "%s: Error: filenames expected\n", argv[0]);
+      usage(false, argv[0]);
       haserr = true;
     }
   }

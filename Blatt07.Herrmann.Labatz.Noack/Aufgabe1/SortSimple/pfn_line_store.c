@@ -12,8 +12,8 @@ struct PfNLineStore
   char separator;
 };
 
-PfNLineStore *pfn_line_store_new(unsigned char *file_contents,
-                                 size_t size,char sep)
+PfNLineStore *pfn_line_store_new(unsigned char *file_contents, size_t size,
+                                 char sep)
 {
   PfNLineStore *pfn_line_store;
   unsigned char *current_line = file_contents;
@@ -33,23 +33,22 @@ PfNLineStore *pfn_line_store_new(unsigned char *file_contents,
     unsigned char *next_sep;
 
     assert(current_line + remain <= file_contents + size);
-    next_sep = memchr(current_line,sep,remain);
+    next_sep = memchr(current_line, sep, remain);
     if (next_sep != NULL)
     {
-      const size_t current_length = (size_t) (next_sep - current_line + 1);
+      const size_t current_length = (size_t)(next_sep - current_line + 1);
 
       if (pfn_line_store->nextfree >= allocated)
       {
         allocated += (allocated * 0.2) + 1024;
-        pfn_line_store->lines
-          = realloc(pfn_line_store->lines,
-                    allocated * sizeof *pfn_line_store->lines);
+        pfn_line_store->lines = realloc(
+            pfn_line_store->lines, allocated * sizeof *pfn_line_store->lines);
       }
       assert(current_length > 0);
       remain -= current_length;
       *next_sep = '\0';
-      pfn_line_store->lines[pfn_line_store->nextfree++]
-        = (PfNLine) current_line;
+      pfn_line_store->lines[pfn_line_store->nextfree++] =
+          (PfNLine) current_line;
       current_line = next_sep + 1;
     } else
     {
@@ -74,12 +73,12 @@ size_t pfn_line_store_number(const PfNLineStore *pfn_line_store)
   return pfn_line_store->nextfree;
 }
 
-PfNLine pfn_line_store_access(const PfNLineStore *pfn_line_store,size_t idx)
+PfNLine pfn_line_store_access(const PfNLineStore *pfn_line_store, size_t idx)
 {
   assert(pfn_line_store != NULL && pfn_line_store->nextfree > 0);
   if (idx > pfn_line_store->nextfree - 1)
   {
-    fprintf(stderr,"%s: index %lu is not in range [0,%lu]\n",__func__,idx,
+    fprintf(stderr, "%s: index %lu is not in range [0,%lu]\n", __func__, idx,
             pfn_line_store->nextfree - 1);
     exit(EXIT_FAILURE);
   }
@@ -97,13 +96,13 @@ void pfn_line_store_show(const PfNLineStore *pfn_line_store)
   size_t idx, num_lines = pfn_line_store_number(pfn_line_store);
   for (idx = 0; idx < num_lines; idx++)
   {
-    PfNLine line = pfn_line_store_access(pfn_line_store,idx);
-    printf("%s%c",line,pfn_line_store->separator);
+    PfNLine line = pfn_line_store_access(pfn_line_store, idx);
+    printf("%s%c", line, pfn_line_store->separator);
   }
 }
 
-void pfn_line_store_sort(PfNLineStore *pfn_line_store,CompareFunc compar)
+void pfn_line_store_sort(PfNLineStore *pfn_line_store, CompareFunc compar)
 {
-  qsort(pfn_line_store -> lines, pfn_line_store_number(pfn_line_store), 
-        sizeof (*pfn_line_store -> lines), compar);
+  qsort(pfn_line_store->lines, pfn_line_store_number(pfn_line_store),
+        sizeof(*pfn_line_store->lines), compar);
 }

@@ -12,28 +12,28 @@ struct ListOfNumbers
 
 ListOfNumbers *list_of_numbers_new(const char *filename)
 {
-  FILE *fp = fopen (filename,"r");
+  FILE *fp = fopen(filename, "r");
   size_t allocated = 0;
   long number;
   ListOfNumbers *list_of_numbers;
 
   if (fp == NULL)
   {
-    fprintf(stderr,"Cannot open file %s\n",filename);
+    fprintf(stderr, "Cannot open file %s\n", filename);
     exit(EXIT_FAILURE);
   }
   list_of_numbers = malloc(sizeof *list_of_numbers);
   assert(list_of_numbers != NULL);
   list_of_numbers->numbers = NULL;
   list_of_numbers->nextfree = 0;
-  while (fscanf(fp,"%ld",&number) == 1)
+  while (fscanf(fp, "%ld", &number) == 1)
   {
     if (list_of_numbers->nextfree >= allocated)
     {
       allocated += (allocated * 0.2) + 4;
-      list_of_numbers->numbers = realloc(list_of_numbers->numbers,
-                                         sizeof *list_of_numbers->numbers * 
-                                         allocated);
+      list_of_numbers->numbers =
+          realloc(list_of_numbers->numbers,
+                  sizeof *list_of_numbers->numbers * allocated);
       assert(list_of_numbers->numbers != NULL);
     }
     assert(list_of_numbers->nextfree < allocated);

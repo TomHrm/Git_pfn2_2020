@@ -11,7 +11,7 @@ int main(void)
   string2[0] = 'A';
   string2[1] = 'B';
 
-  strings = malloc(sizeof (*strings) * 3);
+  strings = malloc(sizeof(*strings) * 3);
   strings[0] = &c;
   strings[1] = string2;
   strings[2] = "third string";
