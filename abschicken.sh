@@ -13,27 +13,25 @@ for file in ./*/*/*/*.c; do
   fdir=$(dirname "$file")
 	cd $fdir
   fname=$(basename "$file")
-  clang-format.sh $fname
-  rm *.bak
+  clang-format -style=file -i $fname
   cd ${pfad}
-done   
-clear
-#Prüft alle *.c Dateien auf richtige Formatierung.
-echo " Folgende Formatierungsfehler treten noch auf:"
-for file in ./*/*/*/*.c; do 
+done
+for file in ./*/*/*/*.h; do 
   fdir=$(dirname "$file")
 	cd $fdir
   fname=$(basename "$file")
-  code_check.py $fname
+  clang-format -style=file -i $fname
   cd ${pfad}
 done
+clear
+echo " Formatierung abgeschlossen..."
 echo " "
 echo "----------------------------------------------------------------------"
-echo "Skript zum abschicken eines PfN-Arbeitsblattes"
-echo "- Ordner folgendes Format BlattXX.NAME1.NAME2.NAME3"
-echo "- Bearbeitungen.txt ausgefüllt?!"
-echo "- tar_loesungen.py <N> zum packen des Blattes"
-echo "- Per Email an: pfn2@zbh.uni-hamburg.de schicken."
+echo " Skript zum abschicken eines PfN-Arbeitsblattes"
+echo " - Ordner folgendes Format BlattXX.NAME1.NAME2.NAME3"
+echo " - Bearbeitungen.txt ausgefüllt?!"
+echo " - tar_loesungen.py <N> zum packen des Blattes"
+echo " - Per Email an: pfn2@zbh.uni-hamburg.de schicken."
 echo "----------------------------------------------------------------------"
 
 ##############################################################################
