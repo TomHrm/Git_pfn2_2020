@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "pfn_line_store.h"
 
-void sort_simple(PfNLineStore *line_store,bool numerical_order,
+void sort_simple(PfNLineStore *line_store, bool numerical_order,
                  bool reverse_order);
 
 #endif
