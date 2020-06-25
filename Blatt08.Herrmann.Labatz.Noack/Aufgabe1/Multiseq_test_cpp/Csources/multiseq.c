@@ -66,7 +66,7 @@ struct Multiseq
   unsigned char *sequence_end;      /* end of memory area storing the
                                        string comprising all sequences
                                        represented by Multiseq */
-  unsigned long maximum_sequence_length,  /* maximum length of all sequences */
+ unsigned long maximum_sequence_length,  /* maximum length of all sequences */
                 total_sequence_length;  /* total length of all sequences */
 };
 

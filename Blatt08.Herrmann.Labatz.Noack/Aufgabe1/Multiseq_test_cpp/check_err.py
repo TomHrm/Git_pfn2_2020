@@ -40,7 +40,7 @@ files2msg \
 
 expected_error_code = 1
 for filename, msg in files2msg.items():
-  full_msg = '{}{}: file "{}"{}'.format(prefix,program,filename,msg)
+  full_msg = '{}: file "{}"{}'.format(program,filename,msg)
   mysubprocess_expect('{}{} 60 {}'.format(prefix,program,filename),
                       expected_error_code,
                       full_msg)
