@@ -4,18 +4,17 @@
 #include <cassert>
 #include "tokenizer.hpp"
 
-#define CHECKBUFFERSIZE\
-        if (nextfree >= allocated)\
-        {\
-          allocated += (allocated * 0.2) + 128;\
-          buffer = (char *) realloc(buffer,sizeof *buffer * allocated);\
-          assert(buffer != NULL);\
-        }
+#define CHECKBUFFERSIZE                                            \
+  if (nextfree >= allocated)                                       \
+  {                                                                \
+    allocated += (allocated * 0.2) + 128;                          \
+    buffer = (char *) realloc(buffer, sizeof *buffer * allocated); \
+    assert(buffer != NULL);                                        \
+  }
 
-typedef void (*TokenHandlerFunc)(const char *,void *);
+typedef void (*TokenHandlerFunc)(const char *, void *);
 
-static void tokenizer(std::ifstream *infile,
-                      TokenHandlerFunc tokenhandler,
+static void tokenizer(std::ifstream *infile, TokenHandlerFunc tokenhandler,
                       void *data)
 {
   bool inword = false;
@@ -24,7 +23,7 @@ static void tokenizer(std::ifstream *infile,
 
   while (infile->good())  // loop while extraction from file is possible
   {
-    unsigned char cc = infile->get();   // get character from file
+    unsigned char cc = infile->get();  // get character from file
 
     if (isalpha(cc) || isdigit(cc) || cc == (int) '_')
     {
@@ -37,7 +36,7 @@ static void tokenizer(std::ifstream *infile,
       {
         CHECKBUFFERSIZE;
         buffer[nextfree] = '\0';
-        tokenhandler(buffer,data);
+        tokenhandler(buffer, data);
         nextfree = 0;
         inword = false;
       }
@@ -47,12 +46,12 @@ static void tokenizer(std::ifstream *infile,
   {
     CHECKBUFFERSIZE;
     buffer[nextfree] = '\0';
-    tokenhandler(buffer,data);
+    tokenhandler(buffer, data);
   }
   free(buffer);
 }
 
-static void add2set(const char *s,void *data)
+static void add2set(const char *s, void *data)
 {
   str_set *words = (str_set *) data;
 
@@ -62,6 +61,6 @@ static void add2set(const char *s,void *data)
 str_set *file2wordset(std::ifstream *infile)
 {
   str_set *wordset = new str_set;
-  tokenizer(infile,add2set,wordset);
+  tokenizer(infile, add2set, wordset);
   return wordset;
 }

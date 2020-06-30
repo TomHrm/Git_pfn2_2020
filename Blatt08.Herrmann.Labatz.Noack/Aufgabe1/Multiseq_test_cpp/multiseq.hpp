@@ -7,14 +7,15 @@
 
 class Multiseq
 {
-  private:
+ private:
   std::vector<const unsigned char *> header_vector;
   std::vector<const unsigned char *> sequence_vector;
   const unsigned char *sequence_end;
   unsigned long _maximum_sequence_length;
   unsigned long _total_sequence_length;
-  public:
-  Multiseq(const char *filename,unsigned char *sequence,
+
+ public:
+  Multiseq(const char *filename, unsigned char *sequence,
            unsigned long totallength);
   ~Multiseq(void);
   unsigned long num_of_sequences(void) const;

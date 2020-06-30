@@ -16,7 +16,21 @@ for file in ./*/*/*/*.c; do
   clang-format -style=file -i $fname
   cd ${pfad}
 done
+for file in ./*/*/*/*.cpp; do 
+  fdir=$(dirname "$file")
+	cd $fdir
+  fname=$(basename "$file")
+  clang-format -style=file -i $fname
+  cd ${pfad}
+done
 for file in ./*/*/*/*.h; do 
+  fdir=$(dirname "$file")
+	cd $fdir
+  fname=$(basename "$file")
+  clang-format -style=file -i $fname
+  cd ${pfad}
+done
+for file in ./*/*/*/*.hpp; do 
   fdir=$(dirname "$file")
 	cd $fdir
   fname=$(basename "$file")
