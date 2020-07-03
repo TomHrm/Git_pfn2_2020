@@ -40,5 +40,5 @@ file <- 'table.txt'
 cat('', file=file)
 for (n in n_people){
   ms <- calculate(n_sampling, n, true_prob, parties)
-  output(ms, parties, n, n_sampling, file, paste('Plotting', n, '.png'))
+  output(ms, parties, n, n_sampling, file, paste('SuperTollesPlot', n, '.png'))
 }
