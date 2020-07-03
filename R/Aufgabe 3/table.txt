@@ -1,0 +1,24 @@
+Data collected from  500  people and with  20000  resampling
+party	expected	median	95% limits
+green 	 0.2100672 	 0.21 	 0.176  -  0.246 
+spd 	 0.1598939 	 0.16 	 0.128  -  0.192 
+csu 	 0.2899981 	 0.29 	 0.25  -  0.33 
+afd 	 0.1100901 	 0.11 	 0.084  -  0.138 
+others 	 0.2299507 	 0.23 	 0.194  -  0.268 
+
+Data collected from  1000  people and with  20000  resampling
+party	expected	median	95% limits
+green 	 0.2102468 	 0.21 	 0.185  -  0.235 
+spd 	 0.1599795 	 0.16 	 0.137  -  0.183 
+csu 	 0.2900436 	 0.29 	 0.262  -  0.319 
+afd 	 0.1098583 	 0.11 	 0.091  -  0.13 
+others 	 0.2298717 	 0.23 	 0.204  -  0.256 
+
+Data collected from  2000  people and with  20000  resampling
+party	expected	median	95% limits
+green 	 0.2100773 	 0.21 	 0.1925  -  0.2285 
+spd 	 0.1601269 	 0.16 	 0.144  -  0.1765 
+csu 	 0.2899436 	 0.29 	 0.27  -  0.31 
+afd 	 0.1100333 	 0.11 	 0.0965  -  0.124 
+others 	 0.2298189 	 0.23 	 0.2115  -  0.248 
+
